@@ -1,0 +1,19 @@
+<div ng-controller="searchCtrl">
+    <div ng-repeat="movie in movies">
+        <tbody>
+        <tr>
+            <td>
+                Title: <a href="#!/movies/{{movie.id}}">{{movie.movieName}}</a></br>
+                Director: {{movie.director}}</br>
+                Release date: {{movie.releaseDate}}</br>
+                Rating: {{movie.rating}}</br>
+                Description: {{movie.description}}</br>
+            </td>
+            <td>
+                PosterURL: {{movie.posterURL}}
+                TrailerURL: {{movie.trailerURL}}
+            </td>
+        </tr>
+        </tbody>
+    </div>
+</div>

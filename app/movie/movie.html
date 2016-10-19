@@ -1,0 +1,17 @@
+<div ng-controller="movieCtrl">
+    Title: {{movie.movieName}}</br>
+    Director: {{movie.director}}</br>
+    Release date: {{movie.releaseDate}}</br>
+    Rating: {{movie.rating}}</br>
+    Description: {{movie.description}}</br>
+    PosterURL: {{movie.posterURL}}
+    TrailerURL: {{movie.trailerURL}}
+
+    <b>Reviews</b>
+    <div ng-repeat="review in reviews">
+        <b>{{review.title}}</b> by <i>{{review.userName}}</i>
+        {{review.postDate}}
+        {{review.reviewText}}
+    </div>
+
+</div>
