@@ -1,0 +1,29 @@
+<div ng-controller="editCtrl">
+    <form ng-submit="updateMovie()">
+        <label for="title">Title:</label>
+        <input id="title" type="text" ng-model="movie.movieName" placeholder="Movie title">
+        <label for="director">Director:</label>
+        <input id="director" type="text" ng-model="movie.director" placeholder="Director">
+        <label for="date">Release date:</label>
+        <input id="date" type="date" ng-model="movie.releaseDate">
+        <label for="poster">Poster URL:</label>
+        <input id="poster" type="url" ng-model="movie.posterURL" placeholder="Poster URL">
+        <label for="trailer">Trailer URL</label>
+        <input id="trailer" type="url" ng-model="movie.trailerURL" placeholder="Trailer URL">
+        <label for="description">Description:</label>
+        <textarea id="description" ng-model="movie.description" placeholder="Movie description"></textarea>
+    </form>
+
+    </br>Rating: {{movie.rating}}
+    <button ng-click="updateRating(movie.id)">Rating</button>
+
+    </br><b>Reviews</b>
+    <div ng-repeat="review in reviews">
+        <b>{{review.title}}</b> by <i>{{review.userName}}</i>
+        {{review.postDate}}
+        {{review.reviewText}}
+        <button ng-click="ban(review.userId)">Ban</button>
+        <button ng-click="deleteReview(review.id)">Delete review</button>
+    </div>
+
+</div>

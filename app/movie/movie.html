@@ -7,6 +7,20 @@
     PosterURL: {{movie.posterURL}}
     TrailerURL: {{movie.trailerURL}}
 
+    </br>Post review here
+    <div>
+        <form ng-submit="postReview()">
+            <label for="rTitle">Review title</label>
+            <input id="rTitle" type="text" ng-model="review.title" placeholder="Review title"/>
+            <label for="rRating">Rating</label>
+            <select id="rRating" ng-model="review.rating">
+                <option ng-repeat="n in generateRating track by $index" value="{{$index + 1}}">{{$index + 1}}</option>
+            </select>
+            <textarea ng-model="review.text" placeholder="Review text"></textarea>
+            <button type="submit">Post review</button>
+        </form>
+    </div>
+
     <b>Reviews</b>
     <div ng-repeat="review in reviews">
         <b>{{review.title}}</b> by <i>{{review.userName}}</i>

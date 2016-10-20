@@ -19,6 +19,10 @@
   display: inline;
 }
 
+.menu > li > form{
+  display: inline;
+}
+
 .menu > li + li:before {
   content: "|";
   padding-right: 0.3em;

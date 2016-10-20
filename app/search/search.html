@@ -1,4 +1,5 @@
 <div ng-controller="searchCtrl">
+    Search results for '{{movieName}}'
     <div ng-repeat="movie in movies">
         <tbody>
         <tr>
@@ -15,5 +16,27 @@
             </td>
         </tr>
         </tbody>
+    </div>
+
+    <ul class="menu">
+        <li ng-if="notFirst">
+            <b ng-click="goFirst()">First</b>
+        </li>
+        <li ng-if="notFirst">
+            <i ng-click="prev()">Prev</i>
+        </li>
+        <li ng-if="numberOfPages > 1" ng-repeat="n in [] | pages: page:numberOfPages:5">
+            <a ng-click="goToPage(n)">{{n+1}} </a>
+        </li>
+        <li ng-if="notLast">
+            <i ng-click="next()">Next</i>
+        </li>
+        <li ng-if="notLast">
+            <b ng-click="goLast()">Last</b>
+        </li>
+    </ul>
+
+    <div ng-if="noMovies">
+        No movies found
     </div>
 </div>

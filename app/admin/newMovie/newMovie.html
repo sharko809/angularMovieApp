@@ -1,0 +1,16 @@
+<div ng-controller="newmovieCtrl">
+    <form ng-submit="addMovie()">
+        <label for="title">Title</label>
+        <input id="title" type="text" ng-model="movie.movieName" placeholder="Movie title"/>
+        <label for="director">Director</label>
+        <input id="director" type="text" ng-model="movie.director" placeholder="Director"/>
+        <label for="date">Release date</label>
+        <input id="date" type="date" ng-model="movie.releaseDate"/>
+        <label for="poster">Poster url</label>
+        <input id="poster" type="url" ng-model="movie.posterURL" placeholder="Poster URL"/>
+        <label for="trailer">Trailer url</label>
+        <input id="trailer" type="url" ng-model="movie.trailerURL" placeholder="Trailer URL"/>
+        <textarea id="description" placeholder="Movie description" ng-model="movie.description"></textarea>
+        <button type="submit">Create movie</button>
+    </form>
+</div>

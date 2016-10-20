@@ -19,7 +19,7 @@ angular.module('myApp.login', ['ngRoute'])
             http({
                 method: 'POST',
                 url: 'http://localhost:8080/login',
-                data: loginData
+                data: user
             }).then(function successCallback(response) {
                 console.log(response.headers);
                 // success logic

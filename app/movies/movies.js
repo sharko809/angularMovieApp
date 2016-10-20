@@ -9,22 +9,45 @@ angular.module('myApp.movies', ['ngRoute'])
         });
     }])
 
-    .controller('moviesCtrl', ['$scope', '$http', function (sc, http) {
+    .controller('moviesCtrl', ['$scope', '$http', '$location', function (sc, http, loc) {
 
         sc.movies = {};
+        var search = loc.search();
+        sc.noMovies = false;
+
+        sc.page = search.page || 0;
 
         http({
             method: 'GET',
-            url: 'http://localhost:8080/movies'
+            url: 'http://localhost:8080/movies?page=' + sc.page
         }).then(function successCallback(response) {
-            if (response.data == null || !response.data.content) {
-                sc.movies = 'No movies found';
+            if (!response.data.content[0]) {
+                sc.noMovies = true;
             } else {
                 sc.movies = response.data.content;
+                sc.numberOfPages = response.data.totalPages;
+                sc.notFirst = !response.data.first;
+                sc.notLast = !response.data.last;
             }
-            // logic
         }, function errorCallback(response) {
-            //logic
+            alert(response.data.userMessage);
+            loc.path('/movies').search('page', 0);
         });
+
+        sc.goFirst = function () {
+            loc.path('/movies').search('page', 0);
+        };
+        sc.prev = function () {
+            loc.path('/movies').search('page', parseInt(sc.page) - 1);
+        };
+        sc.next = function () {
+            loc.path('/movies').search('page', parseInt(sc.page) + 1);
+        };
+        sc.goLast = function () {
+            loc.path('/movies').search('page', sc.numberOfPages - 1);
+        };
+        sc.goToPage = function (pageToGo) {
+            loc.path('/movies').search('page', pageToGo);
+        }
 
     }]);

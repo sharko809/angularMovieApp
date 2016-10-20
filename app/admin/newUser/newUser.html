@@ -1,0 +1,14 @@
+<div ng-controller="newuserCtrl">
+    <form ng-submit="createUser()">
+        <label for="name">Enter nickname:</label>
+        <input id="name" type="text" placeholder="Your nickname" ng-model="user.name">
+        <label for="email">Enter e-mail:</label>
+        <input id="email" type="email" placeholder="Your e-mail" ng-model="user.login">
+        <label for="password">Enter password:</label>
+        <input id="password" type="password" placeholder="Your password" ng-model="user.password">
+        <label for="isAdmin">
+            <input id="isAdmin" type="checkbox" ng-model="user.admin">Is admin
+        </label>
+        <button type="submit">Create user</button>
+    </form>
+</div>

@@ -1,4 +1,4 @@
-<div ng-controller="moviesCtrl">
+<div ng-controller="manageCtrl">
     <div ng-repeat="movie in movies">
         <tbody>
         <tr>
@@ -12,6 +12,10 @@
             <td>
                 PosterURL: {{movie.posterURL}}
                 TrailerURL: {{movie.trailerURL}}
+            </td>
+            <td>
+                <button ng-click="goEditMovie(movie.id)">Edit movie</button>
+                <button ng-click="updateRating(movie.id)">Rating</button>
             </td>
         </tr>
         </tbody>
