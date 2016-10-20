@@ -31,12 +31,25 @@ angular.module('myApp.editmovie', ['ngRoute'])
             alert(response.data.userMessage);
         });
 
+        sc.updateMovie = function () {
+            http({
+                method: 'PUT',
+                url: 'http://localhost:8080/admin/managemovies/' + sc.movieId,
+                data: sc.movie
+            }).then(function success(response) {
+                alert(response.data);
+            }, function error(response) {
+                console.log(response.data);
+                alert(response.data.userMessage);
+            });
+        };
+
         sc.updateRating = function (movieId) {
             http({
-                // TODO facing cors issue. May be change REST server a bit (not a query)
+                // TODO facing cors issue
                 method: 'PUT',
-                url: 'http://localhost:8080/admin/managemovies?movieId=' + movieId
-                // data: movieId
+                url: 'http://localhost:8080/admin/managemovies',
+                data: movieId
             }).then(function success(response) {
                 alert("OK");
             }, function error(response) {
