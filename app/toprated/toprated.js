@@ -12,13 +12,17 @@ angular.module('myApp.toprated', ['ngRoute'])
     .controller('topCtrl', ['$scope', '$http', function (sc, http) {
 
         sc.movies = {};
+        sc.noMovies = false;
 
         http({
             method: 'GET',
             url: 'http://localhost:8080/movies/top'
         }).then(function successCallback(response) {
-            // TODO no movies logic
-            sc.movies = response.data;
+            if (!response.data[0]) {
+                sc.noMovies = true;
+            } else {
+                sc.movies = response.data;
+            }
         }, function errorCallback(response) {
 
         });
