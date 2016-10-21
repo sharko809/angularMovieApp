@@ -13,6 +13,7 @@ angular.module('myApp', [
     'myApp.newuser',
     'myApp.adminMovies',
     'myApp.editmovie',
+    'myApp.users',
     'myApp.version'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
@@ -31,15 +32,18 @@ angular.module('myApp', [
     }])
 
     .filter('pages', function () {
-        return function (input, currentPage, totalPages, range) {
-            currentPage = parseInt(currentPage);
-            totalPages = parseInt(totalPages);
-            range = parseInt(range);
+        /**
+         * Simple pagination filter. Generates page numbers according to their total amount.
+         * @param input this value is to be returned
+         * @param currentPage current page (zero based)
+         * @param numberOfPages total number of pages
+         */
+        return function (input, currentPage, numberOfPages) {
+            var page = parseInt(currentPage);
+            var total = parseInt(numberOfPages);
 
-            var minPage = (currentPage - range < 0) ? 0 :
-                (currentPage - range > (totalPages - (range * 2))) ? totalPages - (range * 2) : currentPage - range;
-            var maxPage = (currentPage + range > totalPages) ? totalPages :
-                (currentPage + range < range * 2) ? range * 2 : currentPage + range;
+            var minPage = (total > 10) ? (page > 5 ? (page - 5) : 0) : 0;
+            var maxPage = (total > 10) ? ((page + 5) > total ? total : (page + 5)) : total;
 
             for (var i = minPage; i < maxPage; i++) {
                 input.push(i);

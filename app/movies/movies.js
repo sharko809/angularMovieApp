@@ -12,9 +12,9 @@ angular.module('myApp.movies', ['ngRoute'])
     .controller('moviesCtrl', ['$scope', '$http', '$location', function (sc, http, loc) {
 
         sc.movies = {};
-        var search = loc.search();
         sc.noMovies = false;
 
+        var search = loc.search();
         sc.page = search.page || 0;
 
         http({
@@ -48,6 +48,6 @@ angular.module('myApp.movies', ['ngRoute'])
         };
         sc.goToPage = function (pageToGo) {
             loc.path('/movies').search('page', pageToGo);
-        }
+        };
 
     }]);
