@@ -21,10 +21,9 @@ angular.module('myApp.adminMovies', ['ngRoute'])
         };
         sc.updateRating = function (movieId) {
             http({
-                // TODO facing cors issue
                 method: 'PUT',
                 url: 'http://localhost:8080/admin/managemovies',
-                data: movieId
+                params: {movieId: movieId}
             }).then(function success(response) {
                 alert("OK");
             }, function error(response) {

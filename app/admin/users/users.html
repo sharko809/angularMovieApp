@@ -14,8 +14,12 @@
             <td>{{user.id}}</td>
             <td>{{user.login}}</td>
             <td>{{user.name}}</td>
-            <td><button ng-click="admin(user.id)">{{user.admin}}</button></td>
-            <td><button ng-click="ban(user.id)">{{user.banned}}</button></td>
+            <td>
+                <button ng-click="admin(user.id)">{{user.admin}}</button>
+            </td>
+            <td>
+                <button ng-click="ban(user.id)">{{user.banned}}</button>
+            </td>
         </tr>
         </tbody>
     </table>

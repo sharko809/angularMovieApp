@@ -13,7 +13,7 @@ angular.module('myApp.login', ['ngRoute'])
 
         var user = {};
 
-        var loginData = {login: 'asd@gmail.com', password: '123'};
+        // var loginData = {login: 'asd@gmail.com', password: '123'};
 
         sc.performLogin = function () {
             http({

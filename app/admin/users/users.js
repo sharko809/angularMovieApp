@@ -40,9 +40,9 @@ angular.module('myApp.users', ['ngRoute'])
             http({
                 method: 'PUT',
                 url: 'http://localhost:8080/admin/ban',
-                params: {userId: userId}
+                params: {userId: userId},
             }).then(function success(response) {
-                alert('OK');
+                alert(response.data);
             }, function error(response) {
                 console.log(response.data);
                 alert(response.data.userMessage);
@@ -55,7 +55,7 @@ angular.module('myApp.users', ['ngRoute'])
                 url: 'http://localhost:8080/admin/adminize',
                 params: {userId: userId}
             }).then(function success(response) {
-                alert('OK');
+                alert(response.data);
             }, function error(response) {
                 console.log(response.data);
                 alert(response.data.userMessage);

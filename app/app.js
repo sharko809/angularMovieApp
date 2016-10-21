@@ -15,9 +15,16 @@ angular.module('myApp', [
     'myApp.editmovie',
     'myApp.users',
     'myApp.version'
-]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+]).factory('httpRequestInterceptor', function () {
+    return {
+        request: function (config) {
+            config.headers['Authorization'] = 'Basic YXNkQGdtYWlsLmNvbToxMjM=';
+            return config;
+        }
+    };
+}).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
     $locationProvider.hashPrefix('!');
-
+    $httpProvider.interceptors.push('httpRequestInterceptor');
     $routeProvider.otherwise({redirectTo: '/login'});
 }])
 

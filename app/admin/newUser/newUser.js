@@ -4,7 +4,7 @@ angular.module('myApp.newuser', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/admin/newuser', {
-           templateUrl: 'admin/newUser/newUser.html',
+            templateUrl: 'admin/newUser/newUser.html',
             controller: 'newuserCtrl'
         });
     }])

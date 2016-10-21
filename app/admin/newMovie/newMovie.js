@@ -9,7 +9,7 @@ angular.module('myApp.newmovie', ['ngRoute'])
         });
     }])
 
-    .controller('newmovieCtrl', ['$scope','$http', function (sc, http) {
+    .controller('newmovieCtrl', ['$scope', '$http', function (sc, http) {
 
         sc.movie = {};
 

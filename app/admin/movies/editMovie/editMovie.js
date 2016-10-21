@@ -46,10 +46,9 @@ angular.module('myApp.editmovie', ['ngRoute'])
 
         sc.updateRating = function (movieId) {
             http({
-                // TODO facing cors issue
                 method: 'PUT',
                 url: 'http://localhost:8080/admin/managemovies',
-                data: movieId
+                params: {movieId: movieId}
             }).then(function success(response) {
                 alert("OK");
             }, function error(response) {
@@ -62,7 +61,7 @@ angular.module('myApp.editmovie', ['ngRoute'])
             http({
                 method: 'DELETE',
                 url: 'http://localhost:8080/admin/delreview',
-                data: reviewId
+                params: {reviewId: reviewId}
             }).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
@@ -75,7 +74,7 @@ angular.module('myApp.editmovie', ['ngRoute'])
             http({
                 method: 'PUT',
                 url: 'http://localhost:8080/admin/ban',
-                data: userId
+                params: {userId: userId}
             }).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
