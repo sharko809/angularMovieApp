@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.login', ['ngRoute'])
+angular.module('myApp.login', [
+    'ngRoute',
+    'myApp.loginService'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
@@ -9,23 +12,17 @@ angular.module('myApp.login', ['ngRoute'])
         });
     }])
 
-    .controller('loginCtrl', ['$scope', '$http', function (sc, http) {
+    .controller('loginCtrl', ['$scope', 'loginService', function (sc, service) {
 
         var user = {};
 
-        // var loginData = {login: 'asd@gmail.com', password: '123'};
-
         sc.performLogin = function () {
-            http({
-                method: 'POST',
-                url: 'http://localhost:8080/login',
-                data: user
-            }).then(function successCallback(response) {
+            service.login(sc.user).then(function successCallback(response) {
+                alert('OK');
                 console.log(response.headers);
-                // success logic
+                console.log(response);
             }, function errorCallback(response) {
                 console.log(response);
-                // error logic
             });
         };
 

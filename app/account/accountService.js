@@ -6,6 +6,10 @@ angular.module('myApp.accountService', [])
 
         var factory = {};
 
+        /**
+         * Performs GET request to the server, acquiring user account data
+         * @returns {*} promise from $http
+         */
         factory.getAccountData = function () {
             return $http({
                 method: 'GET',
@@ -13,6 +17,11 @@ angular.module('myApp.accountService', [])
             })
         };
 
+        /**
+         * Performs PUT request to the server, attempting to update user account data
+         * @param user - user data (name, login, password from the form)
+         * @returns {*} promise from $http
+         */
         factory.updateAccountData = function (user) {
             return $http({
                 method: 'PUT',
