@@ -16,16 +16,9 @@ angular.module('myApp', [
     'myApp.users',
     'myApp.account',
     'myApp.version'
-]).factory('httpRequestInterceptor', function () {
-    return {
-        request: function (config) {
-            config.headers['Authorization'] = 'Basic YXNkQGdtYWlsLmNvbToxMjM=';
-            return config;
-        }
-    };
-}).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
-    $httpProvider.interceptors.push('httpRequestInterceptor');
+
     $routeProvider.otherwise({redirectTo: '/login'});
 }])
 
