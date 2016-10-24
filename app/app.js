@@ -14,6 +14,7 @@ angular.module('myApp', [
     'myApp.adminMovies',
     'myApp.editmovie',
     'myApp.users',
+    'myApp.account',
     'myApp.version'
 ]).factory('httpRequestInterceptor', function () {
     return {
