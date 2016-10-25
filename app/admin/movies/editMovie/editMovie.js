@@ -27,6 +27,9 @@ angular.module('myApp.editmovie', [
                 // TODO release date format issue
                 sc.movie = response.data.movieTransferObject;
                 sc.reviews = makeReviews(response.data);
+                if (!response.data.reviews[0]) {
+                    sc.noReviews = true;
+                }
             }
         }, function error(response) {
             console.log(response.data);

@@ -22,6 +22,9 @@
     </div>
 
     <b>Reviews</b>
+    <div ng-if="noReviews">
+        No reviews yet
+    </div>
     <div ng-repeat="review in reviews">
         <b>{{review.title}}</b> by <i>{{review.userName}}</i>
         {{review.postDate}}

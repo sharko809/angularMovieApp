@@ -23,6 +23,9 @@ angular.module('myApp.movie', [
             // TODO no movies logic
             sc.movie = response.data.movieTransferObject;
             sc.reviews = makeReviews(response.data);
+            if (!response.data.reviews[0]) {
+                sc.noReviews = true;
+            }
         }, function error(response) {
             console.log(response);
             alert(response.data.userMessage);

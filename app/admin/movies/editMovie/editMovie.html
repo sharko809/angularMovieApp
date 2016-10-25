@@ -19,6 +19,9 @@
     <button ng-click="updateRating(movie.id)">Rating</button>
 
     </br><b>Reviews</b>
+    <div ng-if="noReviews">
+        No reviews
+    </div>
     <div ng-repeat="review in reviews">
         <b>{{review.title}}</b> by <i>{{review.userName}}</i>
         {{review.postDate}}
