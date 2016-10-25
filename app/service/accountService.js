@@ -13,7 +13,7 @@ angular.module('myApp.accountService', [])
         factory.getAccountData = function () {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/account'
+                url: 'https://localhost:8443/account'
             })
         };
 
@@ -25,7 +25,7 @@ angular.module('myApp.accountService', [])
         factory.updateAccountData = function (user) {
             return $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/account',
+                url: 'https://localhost:8443/account',
                 data: user
             })
         };

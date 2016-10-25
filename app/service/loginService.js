@@ -14,7 +14,7 @@ angular.module('myApp.loginService', [])
 
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/movies',
+                url: 'https://localhost:8443/movies',
                 headers: {
                     'Authorization': 'Basic ' + encode(user)
                 }

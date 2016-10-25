@@ -14,7 +14,7 @@ angular.module('myApp.moviesService', [])
         factory.getMovies = function (page) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/movies',
+                url: 'https://localhost:8443/movies',
                 params: {page: page}
             })
         };
@@ -28,7 +28,7 @@ angular.module('myApp.moviesService', [])
         factory.performSearch = function (movieName, page) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/search',
+                url: 'https://localhost:8443/search',
                 params: {t: movieName, page: page}
             })
         };
@@ -40,7 +40,7 @@ angular.module('myApp.moviesService', [])
         factory.getTopRated = function () {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/movies/top'
+                url: 'https://localhost:8443/movies/top'
             })
         };
 
@@ -52,7 +52,7 @@ angular.module('myApp.moviesService', [])
         factory.getMovieData = function (movieId) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/movies/' + movieId
+                url: 'https://localhost:8443/movies/' + movieId
             })
         };
 
@@ -65,7 +65,7 @@ angular.module('myApp.moviesService', [])
         factory.postReview = function (movieId, review) {
             return $http({
                 method: 'POST',
-                url: 'http://localhost:8080/movies/' + movieId + '/post',
+                url: 'https://localhost:8443/movies/' + movieId + '/post',
                 data: review
             })
         };
@@ -78,7 +78,7 @@ angular.module('myApp.moviesService', [])
         factory.addMovie = function (movie) {
             return $http({
                 method: 'POST',
-                url: 'http://localhost:8080/admin/addmovie',
+                url: 'https://localhost:8443/admin/addmovie',
                 data: movie
             })
         };
@@ -91,7 +91,7 @@ angular.module('myApp.moviesService', [])
         factory.adminMovies = function (page) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/admin/managemovies',
+                url: 'https://localhost:8443/admin/managemovies',
                 params: {page: page}
             })
         };
@@ -104,7 +104,7 @@ angular.module('myApp.moviesService', [])
         factory.updateMovieRating = function (movieId) {
             return $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/admin/managemovies',
+                url: 'https://localhost:8443/admin/managemovies',
                 params: {movieId: movieId}
             })
         };
@@ -117,7 +117,7 @@ angular.module('myApp.moviesService', [])
         factory.adminGetMovie = function (movieId) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/admin/managemovies/' + movieId
+                url: 'https://localhost:8443/admin/managemovies/' + movieId
             })
         };
 
@@ -130,7 +130,7 @@ angular.module('myApp.moviesService', [])
         factory.updateMovie = function (movieId, movie) {
             return $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/admin/managemovies/' + movieId,
+                url: 'https://localhost:8443/admin/managemovies/' + movieId,
                 data: movie
             })
         };
@@ -143,7 +143,7 @@ angular.module('myApp.moviesService', [])
         factory.deleteReview = function (reviewId) {
             return $http({
                 method: 'DELETE',
-                url: 'http://localhost:8080/admin/delreview',
+                url: 'https://localhost:8443/admin/delreview',
                 params: {reviewId: reviewId}
             })
         };

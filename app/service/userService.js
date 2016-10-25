@@ -10,10 +10,10 @@ angular.module('myApp.userService', [])
          * Get page from users list
          * @returns {*} promise from $http service
          */
-        factory.getUsers = function (page, sortuser) {
+        factory.getUsers = function (page, sort) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/admin/users',
+                url: 'https://localhost:8443/admin/users',
                 params: {page: page, sort: sort}
             })
         };
@@ -26,7 +26,7 @@ angular.module('myApp.userService', [])
         factory.banUser = function (userId) {
             return $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/admin/ban',
+                url: 'https://localhost:8443/admin/ban',
                 params: {userId: userId}
             })
         };
@@ -39,7 +39,7 @@ angular.module('myApp.userService', [])
         factory.makeAdmin = function (userId) {
             return $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/admin/adminize',
+                url: 'https://localhost:8443/admin/adminize',
                 params: {userId: userId}
             })
         };
@@ -52,7 +52,7 @@ angular.module('myApp.userService', [])
         factory.addUser = function (user) {
             return $http({
                 method: 'POST',
-                url: 'http://localhost:8080/admin/newuser',
+                url: 'https://localhost:8443/admin/newuser',
                 data: user
             })
         };
