@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.movie', ['ngRoute'])
+angular.module('myApp.movie', [
+    'ngRoute',
+    'myApp.moviesService'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/movies/:param', {
@@ -9,17 +12,14 @@ angular.module('myApp.movie', ['ngRoute'])
         });
     }])
 
-    .controller('movieCtrl', ['$scope', '$http', '$routeParams', function (sc, http, route) {
+    .controller('movieCtrl', ['$scope', '$routeParams', 'moviesService', function (sc, route, service) {
 
         sc.movieId = route.param;
         sc.movie = {};
         sc.reviews = {};
         sc.generateRating = ratingArray();
 
-        http({
-            method: 'GET',
-            url: 'http://localhost:8080/movies/' + sc.movieId
-        }).then(function success(response) {
+        service.getMovieData(sc.movieId).then(function success(response) {
             // TODO no movies logic
             sc.movie = response.data.movieTransferObject;
             sc.reviews = makeReviews(response.data);
@@ -30,16 +30,9 @@ angular.module('myApp.movie', ['ngRoute'])
 
         sc.review = {};
 
-        /**
-         * Makes POST request with review data attempting to add review to database
-         */
         sc.postReview = function () {
             // TODO keep in mind - this is authorized users feature
-            http({
-                method: 'POST',
-                url: 'http://localhost:8080/movies/' + sc.movieId + '/post',
-                data: sc.review
-            }).then(function success(response) {
+            service.postReview(sc.movieId, sc.review).then(function success(response) {
                 console.log("response: " + response);
                 alert("Review submitted");
             }, function error(response) {

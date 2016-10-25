@@ -1,5 +1,5 @@
 <div ng-controller="editCtrl">
-    <form ng-submit="updateMovie()">
+    <form ng-submit="updMovie()">
         <label for="title">Title:</label>
         <input id="title" type="text" ng-model="movie.movieName" placeholder="Movie title">
         <label for="director">Director:</label>
@@ -24,7 +24,7 @@
         {{review.postDate}}
         {{review.reviewText}}
         <button ng-click="ban(review.userId)">Ban</button>
-        <button ng-click="deleteReview(review.id)">Delete review</button>
+        <button ng-click="delReview(review.id)">Delete review</button>
     </div>
 
 </div>

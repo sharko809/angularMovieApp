@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.users', ['ngRoute'])
+angular.module('myApp.users', [
+    'ngRoute',
+    'myApp.userService'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/admin/users', {
@@ -9,7 +12,7 @@ angular.module('myApp.users', ['ngRoute'])
         });
     }])
 
-    .controller('usersCtrl', ['$scope', '$http', '$location', function (sc, http, loc) {
+    .controller('usersCtrl', ['$scope', 'userService', '$location', function (sc, userService, loc) {
 
         sc.users = {};
         sc.noUsers = false;
@@ -18,10 +21,7 @@ angular.module('myApp.users', ['ngRoute'])
         sc.page = search.page || 0;
         sc.sort = search.sort || 'id';
 
-        http({
-            method: 'GET',
-            url: 'http://localhost:8080/admin/users?page=' + sc.page + '&sort=' + sc.sort
-        }).then(function success(response) {
+        userService.getUsers(sc.page, sc.sort).then(function success(response) {
             if (!response.data.content[0]) {
                 sc.noUsers = true;
             } else {
@@ -37,11 +37,7 @@ angular.module('myApp.users', ['ngRoute'])
         });
 
         sc.ban = function (userId) {
-            http({
-                method: 'PUT',
-                url: 'http://localhost:8080/admin/ban',
-                params: {userId: userId},
-            }).then(function success(response) {
+            userService.banUser(userId).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
                 console.log(response.data);
@@ -50,21 +46,13 @@ angular.module('myApp.users', ['ngRoute'])
         };
 
         sc.admin = function (userId) {
-            http({
-                method: 'PUT',
-                url: 'http://localhost:8080/admin/adminize',
-                params: {userId: userId}
-            }).then(function success(response) {
+            userService.makeAdmin(userId).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
                 console.log(response.data);
                 alert(response.data.userMessage);
             });
         };
-
-        // sc.ban = function(userId) {
-        //     http.put('http://localhost:8080/admin/ban', {}, {params: {userId: userId}});
-        // };
 
         sc.goFirst = function () {
             loc.path('/admin/users').search('page', 0).search('sort', sc.sort);

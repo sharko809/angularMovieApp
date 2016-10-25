@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.movies', ['ngRoute'])
+angular.module('myApp.movies', [
+    'ngRoute',
+    'myApp.moviesService'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/movies', {
@@ -9,7 +12,7 @@ angular.module('myApp.movies', ['ngRoute'])
         });
     }])
 
-    .controller('moviesCtrl', ['$scope', '$http', '$location', function (sc, http, loc) {
+    .controller('moviesCtrl', ['$scope', 'moviesService', '$location', function (sc, service, loc) {
 
         sc.movies = {};
         sc.noMovies = false;
@@ -17,10 +20,7 @@ angular.module('myApp.movies', ['ngRoute'])
         var search = loc.search();
         sc.page = search.page || 0;
 
-        http({
-            method: 'GET',
-            url: 'http://localhost:8080/movies?page=' + sc.page
-        }).then(function successCallback(response) {
+        service.getMovies(sc.page).then(function successCallback(response) {
             if (!response.data.content[0]) {
                 sc.noMovies = true;
             } else {

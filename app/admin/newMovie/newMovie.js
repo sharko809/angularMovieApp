@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.newmovie', ['ngRoute'])
+angular.module('myApp.newmovie', [
+    'ngRoute',
+    'myApp.moviesService',
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/admin/addmovie', {
@@ -9,16 +12,12 @@ angular.module('myApp.newmovie', ['ngRoute'])
         });
     }])
 
-    .controller('newmovieCtrl', ['$scope', '$http', function (sc, http) {
+    .controller('newmovieCtrl', ['$scope', 'moviesService', function (sc, moviesService) {
 
         sc.movie = {};
 
         sc.addMovie = function () {
-            http({
-                method: 'POST',
-                url: 'http://localhost:8080/admin/addmovie',
-                data: sc.movie
-            }).then(function success(response) {
+            moviesService.addMovie(sc.movie).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
                 console.log(response.data);

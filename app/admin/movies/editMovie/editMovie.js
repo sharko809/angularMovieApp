@@ -1,6 +1,10 @@
 'use strict';
 
-angular.module('myApp.editmovie', ['ngRoute'])
+angular.module('myApp.editmovie', [
+    'ngRoute',
+    'myApp.moviesService',
+    'myApp.userService'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/admin/movies/:param', {
@@ -9,15 +13,13 @@ angular.module('myApp.editmovie', ['ngRoute'])
         });
     }])
 
-    .controller('editCtrl', ['$scope', '$http', '$routeParams', '$location', function (sc, http, route, loc) {
+    .controller('editCtrl', ['$scope', 'moviesService', 'userService', '$routeParams', '$location',
+        function (sc, moviesService, userService, route, loc) {
 
         sc.movieId = route.param;
         sc.movie = {};
 
-        http({
-            method: 'GET',
-            url: 'http://localhost:8080/admin/managemovies/' + sc.movieId
-        }).then(function success(response) {
+        moviesService.adminGetMovie(sc.movieId).then(function success(response) {
             if (!response.data.movieTransferObject) {
                 alert('No movie data');
                 loc.path('/admin/movies').search('page', 0);
@@ -31,12 +33,8 @@ angular.module('myApp.editmovie', ['ngRoute'])
             alert(response.data.userMessage);
         });
 
-        sc.updateMovie = function () {
-            http({
-                method: 'PUT',
-                url: 'http://localhost:8080/admin/managemovies/' + sc.movieId,
-                data: sc.movie
-            }).then(function success(response) {
+        sc.updMovie = function () {
+            moviesService.updateMovie(sc.movieId, sc.movie).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
                 console.log(response.data);
@@ -45,11 +43,7 @@ angular.module('myApp.editmovie', ['ngRoute'])
         };
 
         sc.updateRating = function (movieId) {
-            http({
-                method: 'PUT',
-                url: 'http://localhost:8080/admin/managemovies',
-                params: {movieId: movieId}
-            }).then(function success(response) {
+            moviesService.updateMovieRating(movieId).then(function success(response) {
                 alert("OK");
             }, function error(response) {
                 console.log(response.data);
@@ -57,12 +51,8 @@ angular.module('myApp.editmovie', ['ngRoute'])
             });
         };
 
-        sc.deleteReview = function (reviewId) {
-            http({
-                method: 'DELETE',
-                url: 'http://localhost:8080/admin/delreview',
-                params: {reviewId: reviewId}
-            }).then(function success(response) {
+        sc.delReview = function (reviewId) {
+            moviesService.deleteReview(reviewId).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
                 console.log(response.data);
@@ -71,11 +61,7 @@ angular.module('myApp.editmovie', ['ngRoute'])
         };
 
         sc.ban = function (userId) {
-            http({
-                method: 'PUT',
-                url: 'http://localhost:8080/admin/ban',
-                params: {userId: userId}
-            }).then(function success(response) {
+            userService.banUser(userId).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
                 console.log(response.data);

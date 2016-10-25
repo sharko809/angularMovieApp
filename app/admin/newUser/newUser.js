@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.newuser', ['ngRoute'])
+angular.module('myApp.newuser', [
+    'ngRoute',
+    'myApp.userService'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/admin/newuser', {
@@ -9,16 +12,12 @@ angular.module('myApp.newuser', ['ngRoute'])
         });
     }])
 
-    .controller('newuserCtrl', ['$scope', '$http', function (sc, http) {
+    .controller('newuserCtrl', ['$scope', 'userService', function (sc, userService) {
 
         sc.user = {};
 
         sc.createUser = function () {
-            http({
-                method: 'POST',
-                url: 'http://localhost:8080/admin/newuser',
-                data: sc.user
-            }).then(function success(response) {
+            userService.addUser(sc.user).then(function success(response) {
                 alert(response.data);
             }, function error(response) {
                 console.log(response.data);

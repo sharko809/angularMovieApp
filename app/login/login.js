@@ -18,7 +18,7 @@ angular.module('myApp.login', [
 
         sc.performLogin = function () {
             service.login(sc.user).then(function successCallback(response) {
-                alert('OK');
+                alert('Login successful');
                 service.setAuthHeader(sc.user);
             }, function errorCallback(response) {
                 console.log(response);

@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.adminMovies', ['ngRoute'])
+angular.module('myApp.adminMovies', [
+    'ngRoute',
+    'myApp.moviesService'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/admin/movies', {
@@ -9,7 +12,7 @@ angular.module('myApp.adminMovies', ['ngRoute'])
         });
     }])
 
-    .controller('manageCtrl', ['$scope', '$http', '$location', function (sc, http, loc) {
+    .controller('manageCtrl', ['$scope', 'moviesService', '$location', function (sc, moviesService, loc) {
 
         sc.movies = {};
         sc.noMovies = false;
@@ -19,12 +22,9 @@ angular.module('myApp.adminMovies', ['ngRoute'])
         sc.goEditMovie = function (movieId) {
             loc.path('/admin/movies/' + movieId).search();
         };
+
         sc.updateRating = function (movieId) {
-            http({
-                method: 'PUT',
-                url: 'http://localhost:8080/admin/managemovies',
-                params: {movieId: movieId}
-            }).then(function success(response) {
+            moviesService.updateMovieRating(movieId).then(function success(response) {
                 alert("OK");
             }, function error(response) {
                 console.log(response.data);
@@ -32,10 +32,7 @@ angular.module('myApp.adminMovies', ['ngRoute'])
             });
         };
 
-        http({
-            method: 'GET',
-            url: 'http://localhost:8080/admin/managemovies?page=' + sc.page
-        }).then(function success(response) {
+        moviesService.adminMovies(sc.page).then(function success(response) {
             if (!response.data.content[0]) {
                 sc.noMovies = true;
             } else {

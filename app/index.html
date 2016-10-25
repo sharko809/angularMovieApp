@@ -29,6 +29,7 @@
         <form ng-submit="search()"><input type="text" title="Search movie" ng-model="searchInput.query"
                                           placeholder="Search movie..."/></form>
     </li>
+    <li><a href="#" ng-click="performLogout()">Logout</a></li>
 </ul>
 
 <!--[if lt IE 7]>
@@ -41,15 +42,18 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="app.js"></script>
+<script src="service/logoutService.js"></script>
 <script src="login/login.js"></script>
-<script src="login/loginService.js"></script>
+<script src="service/loginService.js"></script>
 <script src="movies/movies.js"></script>
+<script src="service/moviesService.js"></script>
 <script src="movie/movie.js"></script>
 <script src="toprated/toprated.js"></script>
 <script src="search/search.js"></script>
 <script src="admin/admin.js"></script>
 <script src="account/account.js"></script>
-<script src="account/accountService.js"></script>
+<script src="service/accountService.js"></script>
+<script src="service/userService.js"></script>
 <script src="admin/users/users.js"></script>
 <script src="admin/movies/manageMovies.js"></script>
 <script src="admin/movies/editMovie/editMovie.js"></script>

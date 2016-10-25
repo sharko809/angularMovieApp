@@ -15,6 +15,7 @@ angular.module('myApp', [
     'myApp.editmovie',
     'myApp.users',
     'myApp.account',
+    'myApp.logoutService',
     'myApp.version'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
@@ -22,13 +23,17 @@ angular.module('myApp', [
     $routeProvider.otherwise({redirectTo: '/login'});
 }])
 
-    .controller('mainCtrl', ['$scope', '$http', '$location', function (sc, http, loc) {
+    .controller('mainCtrl', ['$scope', '$location', 'logoutService', function (sc, loc, logoutService) {
 
         sc.searchInput = {};
 
         sc.search = function () {
             loc.path('/search').search('t', sc.searchInput.query);
         };
+
+        sc.performLogout = function() {
+            logoutService.logout();
+        }
 
     }])
 

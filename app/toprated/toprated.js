@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.toprated', ['ngRoute'])
+angular.module('myApp.toprated', [
+    'ngRoute',
+    'myApp.moviesService'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/top', {
@@ -9,15 +12,12 @@ angular.module('myApp.toprated', ['ngRoute'])
         });
     }])
 
-    .controller('topCtrl', ['$scope', '$http', function (sc, http) {
+    .controller('topCtrl', ['$scope', 'moviesService', function (sc, service) {
 
         sc.movies = {};
         sc.noMovies = false;
 
-        http({
-            method: 'GET',
-            url: 'http://localhost:8080/movies/top'
-        }).then(function successCallback(response) {
+        service.getTopRated().then(function successCallback(response) {
             if (!response.data[0]) {
                 sc.noMovies = true;
             } else {

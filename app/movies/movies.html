@@ -19,19 +19,19 @@
 
     <ul class="menu">
         <li ng-if="notFirst">
-            <b ng-click="goFirst()">First</b>
+            <a href="" ng-click="goFirst()">First</a>
         </li>
         <li ng-if="notFirst">
-            <i ng-click="prev()">Prev</i>
+            <a href="" ng-click="prev()">Prev</a>
         </li>
         <li ng-if="numberOfPages > 1" ng-repeat="n in [] | pages: page:numberOfPages">
-            <a ng-click="goToPage(n)">{{n+1}} </a>
+            <a href="" ng-click="goToPage(n)">{{n+1}} </a>
         </li>
         <li ng-if="notLast">
-            <i ng-click="next()">Next</i>
+            <a href="" ng-click="next()">Next</a>
         </li>
         <li ng-if="notLast">
-            <b ng-click="goLast()">Last</b>
+            <a href="" ng-click="goLast()">Last</a>
         </li>
     </ul>
 
