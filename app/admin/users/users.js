@@ -36,6 +36,23 @@ angular.module('myApp.users', [
             loc.path('/admin/users').search('page', 0).search('sort', sc.sort);
         });
 
+        sc.sortUsers = function (page, sort, isDesc) {
+            userService.getUsers(page, sort, isDesc).then(function success(response) {
+                if (!response.data.content[0]) {
+                    sc.noUsers = true;
+                } else {
+                    sc.users = response.data.content;
+                    sc.numberOfPages = response.data.totalPages;
+                    sc.notFirst = !response.data.first;
+                    sc.notLast = !response.data.last;
+                }
+            }, function error(response) {
+                console.log(response.data);
+                alert(response.data.userMessage);
+                loc.path('/admin/users').search('page', 0).search('sort', sc.sort);
+            })
+        };
+
         sc.ban = function (userId) {
             userService.banUser(userId).then(function success(response) {
                 alert(response.data);

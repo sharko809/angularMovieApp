@@ -10,7 +10,8 @@ angular.module('myApp.userService', [])
          * Get page from users list
          * @returns {*} promise from $http service
          */
-        factory.getUsers = function (page, sort) {
+        factory.getUsers = function (page, sort, isDesc) {
+            sort = (isDesc === true) ? (sort + ',desc') : sort;
             return $http({
                 method: 'GET',
                 url: 'https://localhost:8443/admin/users',

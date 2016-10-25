@@ -1,4 +1,27 @@
 <div ng-controller="usersCtrl">
+    <ul class="menu">
+        Sort by:
+        <li>
+            <a href="" ng-click="sortUsers(page, 'id', false)">ID</a>
+            <a href="" ng-click="sortUsers(page, 'id', true)">(desc)</a>
+        </li>
+        <li>
+            <a href="" ng-click="sortUsers(page, 'login', false)">Login</a>
+            <a href="" ng-click="sortUsers(page, 'login', true)">(desc)</a>
+        </li>
+        <li>
+            <a href="" ng-click="sortUsers(page, 'name', false)">Username</a>
+            <a href="" ng-click="sortUsers(page, 'name', true)">(desc)</a>
+        </li>
+        <li>
+            <a href="" ng-click="sortUsers(page, 'admin', false)">Admin</a>
+            <a href="" ng-click="sortUsers(page, 'admin', true)">(desc)</a>
+        </li>
+        <li>
+            <a href="" ng-click="sortUsers(page, 'banned', false)">Banned</a>
+            <a href="" ng-click="sortUsers(page, 'banned', true)">(desc)</a>
+        </li>
+    </ul>
     <table style="border-style: double;">
         <thead>
         <tr>
