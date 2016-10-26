@@ -133,3 +133,10 @@
     float: none !important;
     text-align: center;
 }
+
+/*-------------------------------------------Registration*/
+
+#reg_result {
+    margin-top: 1vh;
+    text-align: center;
+}

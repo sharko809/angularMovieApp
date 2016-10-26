@@ -38,7 +38,7 @@
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li ng-if="numberOfPages > 1" ng-repeat="n in [] | pages: page:numberOfPages">
+                        <li ng-class="(page == n) ? 'active' : ''" ng-if="numberOfPages > 1" ng-repeat="n in [] | pages: page:numberOfPages">
                             <a href="" ng-click="goToPage(n)">{{n+1}} </a>
                         </li>
                         <li ng-if="notLast">

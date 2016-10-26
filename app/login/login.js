@@ -13,7 +13,7 @@ angular.module('myApp.login', [
     }])
 
     .controller('loginCtrl', ['$scope', 'loginService', function (sc, service) {
-// TODO REG PAGE
+
         sc.performLogin = function () {
             service.login(sc.user).then(function successCallback(response) {
                 service.setAuthHeader(sc.user);
@@ -31,8 +31,10 @@ angular.module('myApp.login', [
                 angular.element(document.querySelector('#log_result'))
                     .removeClass()
                     .empty()
-                    .addClass('alert alert-danger')
-                    .html(response.data.userMessage);
+                    .addClass('alert alert-danger');
+                response.data.userMessage.forEach(m => {
+                    elem.append(m + '</br>');
+                })
             });
         };
 

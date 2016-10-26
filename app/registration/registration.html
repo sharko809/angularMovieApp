@@ -1,0 +1,35 @@
+<div ng-controller="regCtrl" class="container-fluid">
+    <div class="row">
+        <div class="center-block col-lg-3 col-md-5 col-sm-7 col-xs-10" style="float: none">
+            <form ng-submit="performRegistration()" name="regForm" class="login_form">
+                <div class="form-group" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine}">
+                    <label>Nickname
+                        <input class="form-control" type="text" ng-minlength="3" ng-maxlength="20" name="name"
+                               ng-model="user.name" placeholder="Your preferred name" required>
+                    </label>
+                    <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">
+                        Enter name between 3 and 20 characters</p>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : regForm.login.$invalid && !regForm.login.$pristine}">
+                    <label>E-mail address
+                        <input class="form-control" type="email" ng-model="user.login" name="login"
+                               ng-minlength="3" ng-maxlength="60" placeholder="Your e-mail" required>
+                    </label>
+                    <p ng-show="regForm.login.$invalid && !regForm.login.$pristine" class="help-block">
+                        E-mail is required for login</p>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error' : regForm.password.$invalid && !regForm.password.$pristine}">
+                    <label>Password
+                        <input type="password" class="form-control" ng-model="user.password"
+                               ng-minlength="3" ng-maxlength="15" name="password" placeholder="Password" required>
+                    </label>
+                    <p ng-show="regForm.password.$invalid && !regForm.password.$pristine" class="help-block">
+                        Password should be between 3 and 15 characters long</p>
+                </div>
+                <button ng-disabled="regForm.$invalid" type="submit" class="btn btn-info">Register</button>
+            </form>
+            <div id="reg_result"></div>
+        </div>
+    </div>
+</div>

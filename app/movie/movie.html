@@ -9,26 +9,36 @@
 
     </br>Post review here
     <div>
-        <form ng-submit="postReview()">
-            <label for="rTitle">Review title</label>
-            <input id="rTitle" type="text" ng-model="review.title" placeholder="Review title"/>
-            <label for="rRating">Rating</label>
-            <select id="rRating" ng-model="review.rating">
-                <option ng-repeat="n in generateRating track by $index" value="{{$index + 1}}">{{$index + 1}}</option>
-            </select>
-            <textarea ng-model="review.text" placeholder="Review text"></textarea>
-            <button type="submit">Post review</button>
+        <form ng-submit="postReview()" name="reviewForm">
+            <label>Review title
+                <input type="text" ng-model="review.title" ng-minlength="3" ng-maxlength="100" placeholder="Review title" required/>
+            </label>
+            <label>Rating
+                <select ng-model="review.rating" required>
+                    <option ng-repeat="n in generateRating track by $index" value="{{$index + 1}}">{{$index + 1}}</option>
+                </select>
+            </label>
+            <textarea ng-model="review.text" ng-minlength="5" ng-maxlength="2000" placeholder="Review text" required></textarea>
+            <button type="submit" ng-disabled="reviewForm.$invalid">Post review</button>
         </form>
     </div>
 
     <b>Reviews</b>
-    <div ng-if="noReviews">
-        No reviews yet
-    </div>
+
     <div ng-repeat="review in reviews">
         <b>{{review.title}}</b> by <i>{{review.userName}}</i>
         {{review.postDate}}
         {{review.reviewText}}
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-lg-6 col-md-6 col-sm-12 col-xs-12 center-block no_data">
+                <div ng-if="noReviews" class="alert alert-info">
+                    No reviews yet
+                </div>
+            </section>
+        </div>
     </div>
 
 </div>

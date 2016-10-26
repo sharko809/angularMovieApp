@@ -46,7 +46,7 @@ angular.module('myApp.userService', [])
         };
 
         /**
-         * Creates a new user
+         * Admin only. Creates a new user
          * @param user user data
          * @returns {*} promise from $http service
          */
@@ -54,6 +54,19 @@ angular.module('myApp.userService', [])
             return $http({
                 method: 'POST',
                 url: 'https://localhost:8443/admin/newuser',
+                data: user
+            })
+        };
+
+        /**
+         * Creates a new user
+         * @param user user data
+         * @returns {*} promise from $http service
+         */
+        factory.registerUser = function (user) {
+            return $http({
+                method: 'POST',
+                url: 'https://localhost:8443/registration',
                 data: user
             })
         };

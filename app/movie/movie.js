@@ -36,6 +36,11 @@ angular.module('myApp.movie', [
         sc.postReview = function () {
             // TODO keep in mind - this is authorized users feature
             service.postReview(sc.movieId, sc.review).then(function success(response) {
+                sc.movie = response.data.movieTransferObject;
+                sc.reviews = makeReviews(response.data);
+                if (!response.data.reviews[0]) {
+                    sc.noReviews = true;
+                }
                 console.log("response: " + response);
                 alert("Review submitted");
             }, function error(response) {
