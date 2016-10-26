@@ -36,31 +36,35 @@
     margin-top: 20vh;
 }
 
-.login_form label{
+.login_form label {
     width: 100%;
     margin: 5px 0;
     font-size: 16px;
 }
 
-.login_form label input{
+.login_form label input {
     margin-top: 10px;
     font-size: 18px;
 }
 
-.login_form button{
+.login_form button {
     width: 50%;
     display: block;
     margin: 0 auto;
     font-size: 18px;
 }
 
+#log_result {
+    margin-top: 1vh;
+    text-align: center;
+}
 
 /* ------------------------------------------------Navigation*/
-.nav_search{
+.nav_search {
     position: relative;
 }
 
-.nav_search button{
+.nav_search button {
     outline: none;
     border: none;
     background: none;
@@ -70,7 +74,7 @@
     top: 6px;
 }
 
-.nav_search input{
+.nav_search input {
     padding-right: 35px;
 }
 
@@ -81,7 +85,7 @@
     float: left;
 }
 
-.movie_wrapper .poster_img{
+.movie_wrapper .poster_img {
     width: 100%;
     max-width: 200px;
 }
@@ -92,17 +96,17 @@
     margin-bottom: 7px;
 }
 
-.movie_wrapper .img_wrapper{
+.movie_wrapper .img_wrapper {
     display: flex;
     align-items: center;
 }
 
-.movie_wrapper .m_date{
+.movie_wrapper .m_date {
     color: #7f8c8d;
     margin-bottom: 4px;
 }
 
-.movie_wrapper .m_director{
+.movie_wrapper .m_director {
     margin-bottom: 4px;
 }
 
@@ -110,6 +114,22 @@
     margin-bottom: 7px;
 }
 
-.movie_wrapper .m_rating:after{
+.movie_wrapper .m_rating:after {
     content: "/10";
+}
+
+/*--------------------------------------------Search*/
+
+.search_result {
+    margin: 0 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+/*--------------------------------------------no data section*/
+
+.no_data {
+    float: none !important;
+    text-align: center;
 }

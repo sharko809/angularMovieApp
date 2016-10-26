@@ -28,13 +28,14 @@ angular.module('myApp.search', [
             sc.noMovies = true;
         } else {
             service.performSearch(sc.movieName, sc.page).then(function successCallback(response) {
-                if (!response.data.content[0]) {
+                if (!response.data.content) {
                     sc.noMovies = true;
                 } else {
                     sc.movies = response.data.content;
                     sc.numberOfPages = response.data.totalPages;
                     sc.notFirst = !response.data.first;
                     sc.notLast = !response.data.last;
+                    sc.totalElements = response.data.totalElements;
                 }
             }, function errorCallback(response) {
                 alert(response.data.userMessage);

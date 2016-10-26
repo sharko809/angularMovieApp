@@ -1,6 +1,5 @@
 <div ng-controller="moviesCtrl">
 
-
     <div class="container-fluid">
         <div class="row">
             <div ng-repeat="movie in movies track by $index">
@@ -8,7 +7,7 @@
                 <article class="movie_wrapper col-lg-6 col-md-6 col-sm-12 row">
                     <div class="col-lg-4 col-md-5 col-sm-4 col-xs-6 img_wrapper">
                         <img class="poster_img"
-                             src="{{movie.posterURL || 'https://upload.wikimedia.org/wikipedia/ru/2/21/Warcraft_poster.jpg'}}"/>
+                             ng-src="{{movie.posterURL || 'resources/no-poster-available.png'}}"/>
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                         <section>
@@ -24,11 +23,15 @@
         </div>
     </div>
 
-
-    <div ng-if="noMovies">
-        No movies found
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-lg-6 col-md-6 col-sm-12 col-xs-12 center-block no_data">
+                <div ng-if="noMovies" class="alert alert-info">
+                    No movies found
+                </div>
+            </section>
+        </div>
     </div>
-
 
     <div class="container-fluid">
         <div class="row">

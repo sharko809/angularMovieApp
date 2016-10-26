@@ -29,6 +29,7 @@ angular.module('myApp', [
 
         sc.search = function () {
             loc.path('/search').search('t', sc.searchInput.query);
+            sc.searchInput.query = '';
         };
 
         sc.performLogout = function() {

@@ -13,15 +13,26 @@ angular.module('myApp.login', [
     }])
 
     .controller('loginCtrl', ['$scope', 'loginService', function (sc, service) {
-
-        var user = {};
-
+// TODO REG PAGE
         sc.performLogin = function () {
             service.login(sc.user).then(function successCallback(response) {
-                alert('Login successful');
                 service.setAuthHeader(sc.user);
+                var elem = angular.element(document.querySelector('#log_result'));
+                elem.removeClass()
+                    .empty()
+                    .addClass('alert alert-success')
+                    .html('Login successful');
+                setTimeout(function () {
+                    elem.fadeOut().empty();
+                }, 1500);
+                console.log(response); // TODO remove
             }, function errorCallback(response) {
-                console.log(response);
+                console.log(response);// TODO remove
+                angular.element(document.querySelector('#log_result'))
+                    .removeClass()
+                    .empty()
+                    .addClass('alert alert-danger')
+                    .html(response.data.userMessage);
             });
         };
 
