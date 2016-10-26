@@ -27,3 +27,89 @@
     content: "|";
     padding-right: 0.3em;
 }
+
+/*----------------------------------------------------Login*/
+.login_form {
+    border: 2px solid #bdc3c7;
+    border-radius: 3px;
+    padding: 14px;
+    margin-top: 20vh;
+}
+
+.login_form label{
+    width: 100%;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.login_form label input{
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.login_form button{
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+
+/* ------------------------------------------------Navigation*/
+.nav_search{
+    position: relative;
+}
+
+.nav_search button{
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 18px;
+    position: absolute;
+    right: 7px;
+    top: 6px;
+}
+
+.nav_search input{
+    padding-right: 35px;
+}
+
+/*--------------------------------------------Movies wrapp*/
+
+.movie_wrapper {
+    margin: 20px 0;
+    float: left;
+}
+
+.movie_wrapper .poster_img{
+    width: 100%;
+    max-width: 200px;
+}
+
+.movie_wrapper .m_title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.movie_wrapper .img_wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.movie_wrapper .m_date{
+    color: #7f8c8d;
+    margin-bottom: 4px;
+}
+
+.movie_wrapper .m_director{
+    margin-bottom: 4px;
+}
+
+.movie_wrapper .m_rating {
+    margin-bottom: 7px;
+}
+
+.movie_wrapper .m_rating:after{
+    content: "/10";
+}
