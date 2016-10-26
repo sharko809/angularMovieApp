@@ -1,53 +1,103 @@
 <div ng-controller="movieCtrl">
-    Title: {{movie.movieName}}</br>
-    Director: {{movie.director}}</br>
-    Release date: {{movie.releaseDate}}</br>
-    Rating: {{movie.rating}}</br>
-    Description: {{movie.description}}</br>
-    PosterURL: {{movie.posterURL}}
-    TrailerURL: {{movie.trailerURL}}
 
-    </br>Post review here
-    <div>
-        <form ng-submit="postReview()" name="reviewForm">
-            <div class="form-control"
-                 ng-class="{ 'has-error' : reviewForm.reviewTitle.$invalid && !reviewForm.reviewTitle.$pristine && submitted}">
-                <label>Review title
-                    <input type="text" name="reviewTitle" ng-model="review.title" ng-minlength="3" ng-maxlength="100"
-                           placeholder="Review title" required/>
-                </label>
-                <p ng-show="reviewForm.reviewTitle.$invalid && submitted"
-                   class="help-block">Review title should be between 3 and 100 characters</p>
-            </div>
-            <div class="form-control"
-                 ng-class="{ 'has-error' : reviewForm.reviewRating.$invalid && !reviewForm.reviewRating.$pristine && submitted}">
-                <label>Rating
-                    <select name="reviewRating" ng-model="review.rating" required>
-                        <option ng-repeat="n in generateRating track by $index" value="{{$index + 1}}">{{$index + 1}}
-                        </option>
-                    </select>
-                </label>
-                <p ng-show="reviewForm.reviewRating.$invalid && submitted" class="help-block">Select rating</p>
-            </div>
-            <div class="form-control"
-                 ng-class="{ 'has-error' : reviewForm.reviewText.$invalid && submitted}">
-                <textarea ng-model="review.text" name="reviewText" ng-minlength="5" ng-maxlength="2000" placeholder="Review text"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <article class="movie_wrapper movie_view col-lg-12 row">
+                <div class="col-lg-4 col-md-5 col-sm-4 col-xs-6 img_wrapper">
+                    <img class="poster_img"
+                         ng-src="{{movie.posterURL || 'resources/no-poster-available.png'}}"/>
+                </div>
+                <div class="col-lg-8 col-md-7 col-sm-8 col-xs-6">
+                    <section>
+                        <div class="m_title"><a href="#!/movies/{{movie.id}}">{{movie.movieName}}</a></div>
+                        <div class="m_date">Release date: {{movie.releaseDate}}</div>
+                        <div class="m_director">Director: {{movie.director}}</div>
+                        <div class="m_rating">Rating: {{movie.rating}}</div>
+                        <div class="m_desc hidden-xs"><p ng-bind="movie.description"></p></div>
+                    </section>
+                </div>
+                <div class="col-xs-12 visible-xs-block xs-m_desc">
+                    <div class="m_desc"><p ng-bind="movie.description"></p></div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid">
+        <div class="row review_wrapper">
+            <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12 review">
+                <form ng-submit="postReview()" name="reviewForm">
+                    <div class="tira_wrapper">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : reviewForm.reviewTitle.$invalid && !reviewForm.reviewTitle.$pristine && submitted}">
+                        <label>Review title
+                            <input class="form-control" type="text" name="reviewTitle" ng-model="review.title" ng-minlength="3" ng-maxlength="100"
+                                   placeholder="Review title" required/>
+                        </label>
+                        <p ng-show="reviewForm.reviewTitle.$invalid && submitted"
+                           class="help-block">Review title should be between 3 and 100 characters</p>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : reviewForm.reviewRating.$invalid && !reviewForm.reviewRating.$pristine && submitted}">
+                        <label>Rating
+                            <select class="form-control" name="reviewRating" ng-model="review.rating" required>
+                                <option ng-repeat="n in generateRating track by $index" value="{{$index + 1}}">{{$index + 1}}
+                                </option>
+                            </select>
+                        </label>
+                        <p ng-show="reviewForm.reviewRating.$invalid && submitted" class="help-block">Select rating</p>
+                    </div>
+                        </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : reviewForm.reviewText.$invalid && submitted}">
+                <textarea class="form-control" ng-model="review.text" name="reviewText" ng-minlength="5" ng-maxlength="2000" placeholder="Review text"
                           required></textarea>
-                <p ng-show="reviewForm.reviewText.$invalid && submitted">
-                    Review text should be between 5 and 2000 characters</p>
+                        <p ng-show="reviewForm.reviewText.$invalid && submitted">
+                            Review text should be between 5 and 2000 characters</p>
+                    </div>
+                    <button type="submit" class="btn btn-info text-center">Post review</button>
+                    </form>
             </div>
-            <button type="submit">Post review</button>
-            <!--ng-disabled="reviewForm.$invalid"-->
-        </form>
+        </div>
     </div>
 
-    <b>Reviews</b>
-
-    <div ng-repeat="review in reviews">
-        <b>{{review.title}}</b> by <i>{{review.userName}}</i>
-        {{review.postDate}}
-        {{review.reviewText}}
+    <div class="container-fluid">
+        <section class="row">
+            <div ng-repeat="review in reviews" class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12 review_item">
+                <div class="title_wrapper">
+                    <div>
+                        <span class="r_title">{{review.title}}</span>
+                        <span class="r_auth">by <i>{{review.userName}}</i></span>
+                    </div>
+                    <div class="r_rating_wrap">
+                        <span class="r_rating">10</span>
+                    </div>
+                </div>
+                <div class="r_desc"><p>{{review.reviewText}}</p></div>
+                <div class="r_date">
+                    <span>{{review.postDate}}</span>
+                </div>
+                </div>
+        </section>
     </div>
+
 
     <div class="container-fluid">
         <div class="row">

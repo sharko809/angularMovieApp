@@ -88,6 +88,8 @@
 .movie_wrapper .poster_img {
     width: 100%;
     max-width: 200px;
+    min-width: 200px;
+    min-height: 273px;
 }
 
 .movie_wrapper .m_title {
@@ -118,6 +120,12 @@
     content: "/10";
 }
 
+.movie_wrapper .m_desc{
+    text-indent: 3em;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
 /*--------------------------------------------Search*/
 
 .search_result {
@@ -139,4 +147,172 @@
 #reg_result {
     margin-top: 1vh;
     text-align: center;
+}
+
+/*------------------------------------------Movie view*/
+.movie_view .poster_img{
+    max-width: 350px;
+}
+
+.movie_view .m_title{
+    font-size: 28px;
+}
+
+.movie_view .m_date{
+    font-size: 18px;
+}
+
+.movie_view .m_director{
+    font-size: 18px;
+}
+
+.movie_view .m_rating{
+    font-size: 18px;
+}
+
+.movie_view .m_desc{
+    font-size: 16px;
+    margin-top: 15px;
+    padding: 20px 20px;
+    background-color: #ecf0f1;
+    border-radius: 4px;
+}
+
+
+
+@media (max-width: 768px){
+    .movie_view section{
+        margin-top: 35px;
+    }
+
+    .movie_view .img_wrapper{
+        display: flex;
+        justify-content: center;
+    }
+
+    .movie_view .poster_img{
+        max-width: 230px;
+    }
+
+    .movie_view .xs-m_desc{
+
+    }
+}
+
+.review textarea{
+    max-width: 100%;
+}
+
+.review{
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 18px !important;
+    margin-top: 20px;
+}
+
+.review_item{
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 18px !important;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.review_item .title_wrapper{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.review_item .title_wrapper .r_rating:before{
+    content: "Rating: ";
+}
+.review_item .title_wrapper .r_rating:after{
+    content: "/10";
+}
+
+.review_item .title_wrapper .r_title{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.review_item:last-child{
+    margin-bottom: 50px;
+}
+
+.review_item .title_wrapper .r_auth{
+    color: #7f8c8d;
+}
+
+.review_item .r_date{
+    display: flex;
+    justify-content: flex-end;
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.review_item .r_date span:before{
+    content: "Posted: ";
+    font-style: italic;
+}
+
+.review button{
+    font-size: 15px;
+    width: 50%;
+    max-width: 150px;
+    display: block;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.review_wrapper{
+    padding: 0 15px;
+}
+
+body{
+    font-family: "Open Sans" !important;
+}
+
+.tira_wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.users_table td{
+    vertical-align: middle !important;
+}
+
+.users_table .butt_td{
+    text-align: center;
+}
+
+.users_table .butt_td button{
+    width: 100%;
+}
+
+.manage_movie img{
+    max-width: 170px !important;
+    width: 170px !important;
+    height: 250px !important;
+    margin-top: 15px;
+    opacity: 0.8;
+}
+
+.manage_movie{
+    max-width: 300px;
+}
+
+.manage_movie_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.manage_movie .manage_t{
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
