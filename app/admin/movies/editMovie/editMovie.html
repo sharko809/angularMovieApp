@@ -1,33 +1,66 @@
 <div ng-controller="editCtrl">
+
     <form ng-submit="updMovie()">
-        <label for="title">Title:</label>
-        <input id="title" type="text" ng-model="movie.movieName" placeholder="Movie title">
-        <label for="director">Director:</label>
-        <input id="director" type="text" ng-model="movie.director" placeholder="Director">
-        <label for="date">Release date:</label>
-        <input id="date" type="date" ng-model="movie.releaseDate">
-        <label for="poster">Poster URL:</label>
-        <input id="poster" type="url" ng-model="movie.posterURL" placeholder="Poster URL">
-        <label for="trailer">Trailer URL</label>
-        <input id="trailer" type="url" ng-model="movie.trailerURL" placeholder="Trailer URL">
-        <label for="description">Description:</label>
-        <textarea id="description" ng-model="movie.description" placeholder="Movie description"></textarea>
-        <button type="submit">Save changes</button>
+        <div class="container-fluid">
+            <div class="row">
+                <article style="width: 100%" class="movie_wrapper movie_view col-lg-12 row">
+                    <div class="col-lg-4 col-md-5 col-sm-4 col-xs-6 img_wrapper">
+                        <img class="poster_img"
+                             ng-src="{{movie.posterURL || 'resources/no-poster-available.png'}}"/>
+                    </div>
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-6">
+                        <section class="edit_mov">
+                            <div class="m_title"><input id="title" type="text" ng-model="movie.movieName"
+                                                        placeholder="Movie title"></div>
+                            <div class="m_date"><input id="date" type="date" ng-model="movie.releaseDate"></div>
+                            <div class="m_director"><input id="director" type="text" ng-model="movie.director"
+                                                           placeholder="Director"></div>
+                            <div class="m_rating">Rating: {{movie.rating}}</div>
+                            <div class="m_p_url">Poster URL: <input id="poster" type="url" ng-model="movie.posterURL"
+                                                                    placeholder="Poster URL"></div>
+                            <div class="m_p_url">Trailer URL: <input id="trailer" type="url" ng-model="movie.trailerURL"
+                                                                     placeholder="Trailer URL"></div>
+                            <div class="m_desc hidden-xs"><textarea id="description" ng-model="movie.description"
+                                                                    placeholder="Movie description"></textarea></div>
+                        </section>
+                        <button type="submit" class="btn btn-success save_changes">Save changes</button>
+                    </div>
+                    <div class="col-xs-12 visible-xs-block xs-m_desc">
+                        <div class="m_desc"><textarea id="description" ng-model="movie.description"
+                                                      placeholder="Movie description"></textarea></div>
+                    </div>
+
+                </article>
+            </div>
+        </div>
     </form>
+
 
     </br>Rating: {{movie.rating}}
     <button ng-click="updateRating(movie.id)">Rating</button>
 
-    </br><b>Reviews</b>
-    <div ng-if="noReviews">
-        No reviews
-    </div>
-    <div ng-repeat="review in reviews">
-        <b>{{review.title}}</b> by <i>{{review.userName}}</i>
-        {{review.postDate}}
-        {{review.reviewText}}
-        <button ng-click="ban(review.userId)">Ban</button>
-        <button ng-click="delReview(review.id)">Delete review</button>
+
+    <div class="container-fluid">
+        <section class="row">
+            <div ng-repeat="review in reviews"
+                 class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12 review_item">
+                <div class="title_wrapper">
+                    <div>
+                        <span class="r_title">{{review.title}}</span>
+                        <span class="r_auth">by <i>{{review.userName}}</i></span>
+                    </div>
+                    <div class="r_rating_wrap">
+                        <span class="r_rating">{{review.rating}}</span>
+                    </div>
+                </div>
+                <div class="r_desc"><p>{{review.reviewText}}</p></div>
+                <div class="r_date">
+                    <button ng-click="ban(review.userId)" class="btn btn-danger">Ban</button>
+                    <button ng-click="delReview(review.id)" class="btn btn-warning">Delete review</button>
+                    <span>{{review.postDate}}</span>
+                </div>
+            </div>
+        </section>
     </div>
 
 </div>
