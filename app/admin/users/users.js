@@ -45,6 +45,7 @@ angular.module('myApp.users', [
                     sc.numberOfPages = response.data.totalPages;
                     sc.notFirst = !response.data.first;
                     sc.notLast = !response.data.last;
+                    sc.sort = sort + (isDesc ? ',desc' : '');
                 }
             }, function error(response) {
                 console.log(response.data);

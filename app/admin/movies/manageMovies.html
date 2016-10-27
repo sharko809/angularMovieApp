@@ -4,22 +4,20 @@
     <div class="row manage_movie_wrap">
         <div ng-repeat="movie in movies" class="col-sm-6 col-md-3 manage_movie">
             <div class="thumbnail">
-                <img class="" ng-src="https://upload.wikimedia.org/wikipedia/ru/2/21/Warcraft_poster.jpg">
+                <img ng-src="{{movie.posterURL || 'resources/no-poster-available.png'}}">
                 <div class="caption">
-                    <h3 class="manage_t"><a href="#!/movies/{{movie.id}}">{{movie.movieName}}</a></h3>
+                    <h3 class="manage_t"><a ng-href="#!/movies/{{movie.id}}">{{movie.movieName}}</a></h3>
                     <p>Director: {{movie.director}}</p>
                     <p>Release date: {{movie.releaseDate}}</p>
                     <p>Rating: {{movie.rating}}</p>
                     <p>
-                        <a href="#" ng-click="goEditMovie(movie.id)" class="btn btn-primary" role="button">Edit movie</a>
-                        <a href="#" ng-click="updateRating(movie.id)" class="btn btn-default" role="button">Rating</a>
+                        <a ng-href="#!/admin/movies/{{movie.id}}" class="btn btn-primary" role="button">Edit movie</a>
+                        <button ng-click="updateRating(movie.id)" class="btn btn-default">Rating</button>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-
-
 
     <div class="container-fluid">
         <div class="row">

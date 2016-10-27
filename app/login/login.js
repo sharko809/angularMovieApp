@@ -2,7 +2,8 @@
 
 angular.module('myApp.login', [
     'ngRoute',
-    'myApp.loginService'
+    'myApp.loginService',
+    'cookieService'
 ])
 
     .config(['$routeProvider', function ($routeProvider) {
@@ -12,11 +13,14 @@ angular.module('myApp.login', [
         });
     }])
 
-    .controller('loginCtrl', ['$scope', 'loginService', function (sc, service) {
+    .controller('loginCtrl', ['$scope', 'loginService', 'cookieService', function (sc, service, cookieService) {
 
         sc.performLogin = function () {
             service.login(sc.user).then(function successCallback(response) {
-                service.setAuthHeader(sc.user);
+                angular.element(document.querySelector('#login')).val('');
+                angular.element(document.querySelector('#password')).val('');
+                service.setAuthHeader(response.data);
+                cookieService.putTokenCookie(response.data);
                 var elem = angular.element(document.querySelector('#log_result'));
                 elem.removeClass()
                     .empty()
@@ -28,7 +32,7 @@ angular.module('myApp.login', [
                 console.log(response); // TODO remove
             }, function errorCallback(response) {
                 console.log(response);// TODO remove
-                angular.element(document.querySelector('#log_result'))
+                var elem = angular.element(document.querySelector('#log_result'))
                     .removeClass()
                     .empty()
                     .addClass('alert alert-danger');

@@ -14,15 +14,15 @@ angular.module('myApp.loginService', [])
 
             return $http({
                 method: 'GET',
-                url: 'https://localhost:8443/account',
+                url: 'https://localhost:8443/loginPage',
                 headers: {
                     'Authorization': 'Basic ' + encode(user)
                 }
             })
         };
 
-        factory.setAuthHeader = function (user) {
-            $http.defaults.headers.common.Authorization = 'Basic ' + encode(user);
+        factory.setAuthHeader = function (token) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
         };
 
         return factory;

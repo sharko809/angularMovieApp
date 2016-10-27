@@ -140,6 +140,7 @@
 .no_data {
     float: none !important;
     text-align: center;
+    margin-top: 20px;
 }
 
 /*-------------------------------------------Registration*/

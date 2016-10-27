@@ -4,7 +4,7 @@
             <form ng-submit="performLogin()" name="loginForm" class="login_form">
                 <div class="form-group"
                      ng-class="{ 'has-error' : loginForm.login.$invalid && !loginForm.login.$pristine}">
-                    <label>E-mail address
+                    <label>Login
                         <input class="form-control" type="email" id="login" ng-model="user.login" name="login"
                                ng-minlength="3" ng-maxlength="60" placeholder="Your e-mail" required>
                     </label>

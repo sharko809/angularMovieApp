@@ -18,6 +18,7 @@ angular.module('myApp.movie', [
         sc.movie = {};
         sc.reviews = {};
         sc.generateRating = ratingArray();
+        sc.submitted = false;
 
         service.getMovieData(sc.movieId).then(function success(response) {
             // TODO no movies logic
@@ -34,6 +35,10 @@ angular.module('myApp.movie', [
         sc.review = {};
 
         sc.postReview = function () {
+            // if (sc.reviewForm.$invalid) {
+            //     sc.submitted = true;
+            //     return;
+            // }
             // TODO keep in mind - this is authorized users feature
             service.postReview(sc.movieId, sc.review).then(function success(response) {
                 sc.movie = response.data.movieTransferObject;

@@ -1,20 +1,5 @@
 <div ng-controller="movieCtrl">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="container-fluid">
         <div class="row">
             <article class="movie_wrapper movie_view col-lg-12 row">
@@ -24,7 +9,7 @@
                 </div>
                 <div class="col-lg-8 col-md-7 col-sm-8 col-xs-6">
                     <section>
-                        <div class="m_title"><a href="#!/movies/{{movie.id}}">{{movie.movieName}}</a></div>
+                        <div class="m_title">{{movie.movieName}}</div>
                         <div class="m_date">Release date: {{movie.releaseDate}}</div>
                         <div class="m_director">Director: {{movie.director}}</div>
                         <div class="m_rating">Rating: {{movie.rating}}</div>
@@ -37,8 +22,6 @@
             </article>
         </div>
     </div>
-
-
 
     <div class="container-fluid">
         <div class="row review_wrapper">
@@ -87,7 +70,7 @@
                         <span class="r_auth">by <i>{{review.userName}}</i></span>
                     </div>
                     <div class="r_rating_wrap">
-                        <span class="r_rating">10</span>
+                        <span class="r_rating">{{review.rating}}</span>
                     </div>
                 </div>
                 <div class="r_desc"><p>{{review.reviewText}}</p></div>

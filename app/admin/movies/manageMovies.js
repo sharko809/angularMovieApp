@@ -19,9 +19,6 @@ angular.module('myApp.adminMovies', [
 
         var search = loc.search();
         sc.page = search.page || 0;
-        sc.goEditMovie = function (movieId) {
-            loc.path('/admin/movies/' + movieId).search();
-        };
 
         sc.updateRating = function (movieId) {
             moviesService.updateMovieRating(movieId).then(function success(response) {

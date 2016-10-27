@@ -17,6 +17,7 @@ angular.module('myApp', [
     'myApp.account',
     'myApp.logoutService',
     'registration',
+    'cookieService',
     'myApp.version'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
@@ -59,4 +60,10 @@ angular.module('myApp', [
 
             return input;
         };
-    });
+    })
+    .run(['cookieService', 'loginService', function (cookieService, loginService) {
+        var authCookie = cookieService.getCookie('user_auth_cookie');
+        if (authCookie != null || authCookie != undefined) {
+            loginService.setAuthHeader(authCookie);
+        }
+    }]);
