@@ -23,7 +23,6 @@ angular.module('myApp.account', [
             alert(response.data.userMessage);
         });
 
-        // TODO if password is updated - reset auth header
         sc.updateAccount = function () {
             service.updateAccountData(sc.user).then(function success(response) {
                 alert('Account updated');
