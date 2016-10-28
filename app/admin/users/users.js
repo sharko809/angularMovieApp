@@ -56,7 +56,8 @@ angular.module('myApp.users', [
 
         sc.ban = function (userId) {
             userService.banUser(userId).then(function success(response) {
-                alert(response.data);
+                alert(response.data);// TODO inform in other way
+                sc.users = toggleBan(sc.users, userId);
             }, function error(response) {
                 console.log(response.data);
                 alert(response.data.userMessage);
@@ -65,7 +66,8 @@ angular.module('myApp.users', [
 
         sc.admin = function (userId) {
             userService.makeAdmin(userId).then(function success(response) {
-                alert(response.data);
+                alert(response.data);// TODO inform in other way
+                sc.users = toggleAdmin(sc.users, userId);
             }, function error(response) {
                 console.log(response.data);
                 alert(response.data.userMessage);
@@ -89,3 +91,29 @@ angular.module('myApp.users', [
         };
 
     }]);
+
+var toggleBan = function (users, userId) {
+    if (users == null || userId == null) {
+        return null;
+    }
+    users.forEach(u => {
+        if (u.id == userId) {
+            u.banned = u.banned != true;
+        }
+    });
+
+    return users;
+};
+
+var toggleAdmin = function (users, userId) {
+    if (users == null || userId == null) {
+        return null;
+    }
+    users.forEach(u => {
+        if (u.id == userId) {
+            u.admin = u.admin != true;
+        }
+    });
+
+    return users;
+};

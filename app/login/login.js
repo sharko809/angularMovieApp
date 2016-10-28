@@ -19,6 +19,7 @@ angular.module('myApp.login', [
             service.login(sc.user).then(function successCallback(response) {
                 angular.element(document.querySelector('#login')).val('');
                 angular.element(document.querySelector('#password')).val('');
+                sc.loginForm.$invalid = true;
                 service.setAuthHeader(response.data);
                 cookieService.putTokenCookie(response.data);
                 var elem = angular.element(document.querySelector('#log_result'));
@@ -26,9 +27,6 @@ angular.module('myApp.login', [
                     .empty()
                     .addClass('alert alert-success')
                     .html('Login successful');
-                setTimeout(function () {
-                    elem.fadeOut().empty();
-                }, 1500);
                 console.log(response); // TODO remove
             }, function errorCallback(response) {
                 console.log(response);// TODO remove
@@ -38,7 +36,7 @@ angular.module('myApp.login', [
                     .addClass('alert alert-danger');
                 response.data.userMessage.forEach(m => {
                     elem.append(m + '</br>');
-                })
+                });
             });
         };
 

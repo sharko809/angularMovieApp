@@ -1,16 +1,36 @@
 <div ng-controller="newmovieCtrl">
-    <form ng-submit="addMovie()">
-        <label for="title">Title</label>
-        <input id="title" type="text" ng-model="movie.movieName" placeholder="Movie title"/>
-        <label for="director">Director</label>
-        <input id="director" type="text" ng-model="movie.director" placeholder="Director"/>
-        <label for="date">Release date</label>
-        <input id="date" type="date" ng-model="movie.releaseDate"/>
-        <label for="poster">Poster url</label>
-        <input id="poster" type="url" ng-model="movie.posterURL" placeholder="Poster URL"/>
-        <label for="trailer">Trailer url</label>
-        <input id="trailer" type="url" ng-model="movie.trailerURL" placeholder="Trailer URL"/>
-        <textarea id="description" placeholder="Movie description" ng-model="movie.description"></textarea>
-        <button type="submit">Create movie</button>
-    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <form ng-submit="addMovie()" name="mForm">
+                <div style="width: 100%" class="movie_wrapper movie_view col-lg-12 row">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-6">
+                        <div class="edit_mov">
+                            <label>Title
+                                <input type="text" ng-model="movie.movieName" placeholder="Movie title"/>
+                            </label>
+                            <label>Director
+                                <input type="text" ng-model="movie.director" placeholder="Director"/>
+                            </label>
+                            <label>Release date
+                                <input type="date" ng-model="movie.releaseDate"/>
+                            </label>
+                            <label>Poster url
+                                <input type="url" ng-model="movie.posterURL" placeholder="Poster URL"/>
+                            </label>
+                            <label>Trailer url
+                                <input type="url" ng-model="movie.trailerURL" placeholder="Trailer URL"/>
+                            </label>
+                            <textarea id="description" placeholder="Movie description" ng-model="movie.description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4 col-xs-6 img_wrapper">
+                        <img class="poster_img"
+                             ng-src="{{movie.posterURL || 'resources/no-poster-available.png'}}"/>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-info">Create movie</button>
+            </form>
+        </div>
+    </div>
 </div>

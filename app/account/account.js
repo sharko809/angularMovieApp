@@ -19,16 +19,30 @@ angular.module('myApp.account', [
         service.getAccountData().then(function success(response) {
             sc.user = response.data;
         }, function error(response) {
-            console.log(response);
-            alert(response.data.userMessage);
+            var elem = angular.element(document.querySelector('#upd_result'))
+                .removeClass()
+                .empty()
+                .addClass('alert alert-danger result_block');
+            response.data.userMessage.forEach(m => {
+                elem.append(m + '</br>');
+            });
         });
 
         sc.updateAccount = function () {
             service.updateAccountData(sc.user).then(function success(response) {
-                alert('Account updated');
+                var elem = angular.element(document.querySelector('#upd_result'))
+                    .removeClass()
+                    .empty()
+                    .addClass('alert alert-success result_block')
+                    .html('Account updated');
             }, function error(response) {
-                console.log(response);
-                alert(response.data.userMessage);
+                var elem = angular.element(document.querySelector('#upd_result'))
+                    .removeClass()
+                    .empty()
+                    .addClass('alert alert-danger result_block');
+                response.data.userMessage.forEach(m => {
+                    elem.append(m + '</br>');
+                });
             });
         }
 

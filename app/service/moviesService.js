@@ -148,6 +148,18 @@ angular.module('myApp.moviesService', [])
             })
         };
 
+        /**
+         * Get reviews for particular movie
+         * @param movieId id of movie to retrieve reviews
+         * @returns {*} promise from $http service
+         */
+        factory.getReviewsByMovie = function (movieId) {
+          return $http({
+              method: 'GET',
+              url: 'https://localhost:8443/admin/reviews/' + movieId
+          })
+        };
+
         return factory;
 
     }]);

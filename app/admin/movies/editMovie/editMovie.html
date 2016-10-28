@@ -1,6 +1,6 @@
 <div ng-controller="editCtrl">
 
-    <form ng-submit="updMovie()">
+    <form ng-submit="updMovie()" name="editForm">
         <div class="container-fluid">
             <div class="row">
                 <article style="width: 100%" class="movie_wrapper movie_view col-lg-12 row">
@@ -10,35 +10,100 @@
                     </div>
                     <div class="col-lg-8 col-md-7 col-sm-8 col-xs-6">
                         <section class="edit_mov">
-                            <div class="m_title"><input id="title" type="text" ng-model="movie.movieName"
-                                                        placeholder="Movie title"></div>
-                            <div class="m_date"><input id="date" type="date" ng-model="movie.releaseDate"></div>
-                            <div class="m_director"><input id="director" type="text" ng-model="movie.director"
-                                                           placeholder="Director"></div>
-                            <div class="m_rating">Rating: {{movie.rating}}</div>
-                            <div class="m_p_url">Poster URL: <input id="poster" type="url" ng-model="movie.posterURL"
-                                                                    placeholder="Poster URL"></div>
-                            <div class="m_p_url">Trailer URL: <input id="trailer" type="url" ng-model="movie.trailerURL"
-                                                                     placeholder="Trailer URL"></div>
-                            <div class="m_desc hidden-xs"><textarea id="description" ng-model="movie.description"
-                                                                    placeholder="Movie description"></textarea></div>
+                            <div ng-class="editForm.title.$invalid && !editForm.title.$pristine ? 'm_title has-error' : 'm_title'">
+                                <input id="title" type="text" name="title" ng-minlength="1" ng-maxlength="100"
+                                       ng-model="movie.movieName" placeholder="Movie title" title="Movie title"
+                                       required>
+                                <p ng-show="editForm.title.$error.required && !editForm.title.$pristine"
+                                   class="help-block">
+                                    Title should have at least 1 character</p>
+                                <p ng-show="editForm.title.$error.maxlength && !editForm.title.$pristine"
+                                   class="help-block">
+                                    Title should have not more than 100 characters</p>
+                            </div>
+                            <div class="m_date">
+                                <input id="date" type="date" ng-model="movie.releaseDate" title="Movie release date">
+                            </div>
+                            <div ng-class="editForm.director.$invalid && !editForm.director.$pristine ? 'm_director has-error' : 'm_director'">
+                                <input id="director" name="director" type="text" ng-model="movie.director"
+                                       ng-minlength="1"
+                                       ng-maxlength="40" placeholder="Director" title="Movie director name" required>
+                                <p ng-show="editForm.director.$error.required && !editForm.director.$pristine"
+                                   class="help-block">
+                                    Director name should have at least 1 character</p>
+                                <p ng-show="editForm.director.$error.maxlength && !editForm.director.$pristine"
+                                   class="help-block">
+                                    Director name should have not more than 40 characters</p>
+                            </div>
+                            <div class="r_holder">
+                                <div class="m_rating">Rating: {{movie.rating}}</div>
+                                <button type="button" style="margin-left: 7px;" class="btn btn-success"
+                                        ng-click="updateRating(movie.id)" title="Recount rating">Rating
+                                </button>
+                            </div>
+                            <div ng-class="editForm.poster.$invalid && !editForm.poster.$pristine ? 'm_p_url has-error' : 'm_p_url'">
+                                Poster URL: <input id="poster" name="poster" type="url" ng-model="movie.posterURL"
+                                                   ng-maxlength="255" placeholder="Poster URL"
+                                                   title="Link to poster source">
+                                <p ng-show="editForm.poster.$error.maxlength && !editForm.poster.$pristine"
+                                   class="help-block">
+                                    Poster url should have not more than 255 characters</p>
+                                <p ng-show="editForm.poster.$error.url && !editForm.poster.$pristine"
+                                   class="help-block">
+                                    Poster url should be a valid url address</p>
+                            </div>
+                            <div ng-class="editForm.trailer.$invalid && !editForm.trailer.$pristine ? 'm_p_url has-error' : 'm_p_url'">
+                                Trailer URL: <input id="trailer" name="trailer" type="url" ng-model="movie.trailerURL"
+                                                    ng-maxlength="255" placeholder="Trailer URL"
+                                                    title="Link to trailer source">
+                                <p ng-show="editForm.trailer.$error.maxlength && !editForm.trailer.$pristine"
+                                   class="help-block">
+                                    Trailer url should have not more than 255 characters</p>
+                                <p ng-show="editForm.trailer.$error.url && !editForm.trailer.$pristine"
+                                   class="help-block">
+                                    Trailer url should be a valid url address</p>
+                            </div>
+                            <div ng-class="editForm.descriptionLg.$invalid && !editForm.descriptionLg.$pristine ? 'm_desc hidden-xs has-error' : 'm_desc hidden-xs'">
+                                <textarea id="description" name="descriptionLg" ng-minlength="5" ng-maxlength="2000"
+                                          title="Movie description" ng-model="movie.description"
+                                          placeholder="Movie description" required></textarea>
+                                <p ng-show="editForm.descriptionLg.$error.required && !editForm.descriptionLg.$pristine"
+                                   class="help-block">
+                                    Description should not be empty</p>
+                                <p ng-show="editForm.descriptionLg.$error.minlength && !editForm.descriptionLg.$pristine"
+                                   class="help-block">
+                                    Description should have at least 5 characters</p>
+                                <p ng-show="editForm.descriptionLg.$error.maxlength && !editForm.descriptionLg.$pristine"
+                                   class="help-block">
+                                    Description should have not more than 2000 characters</p>
+                            </div>
                         </section>
-                        <button type="submit" class="btn btn-success save_changes">Save changes</button>
+                        <button ng-disabled="editForm.$invalid" type="submit" class="btn btn-success save_changes" title="Apply changes">Save changes
+                        </button>
+                        <div id="edit_result"></div>
                     </div>
                     <div class="col-xs-12 visible-xs-block xs-m_desc">
-                        <div class="m_desc"><textarea id="description" ng-model="movie.description"
-                                                      placeholder="Movie description"></textarea></div>
+                        <div ng-class="editForm.descriptionXs.$invalid && !editForm.descriptionXs.$pristine ? 'm_desc has-error' : 'm_desc'">
+                            <textarea id="description" name="descriptionXs" ng-minlength="5" ng-maxlength="2000"
+                                      title="Movie description" ng-model="movie.description"
+                                      placeholder="Movie description" required>
+                            </textarea>
+                            <p ng-show="editForm.descriptionXs.$error.required && !editForm.descriptionXs.$pristine"
+                               class="help-block">
+                                Description should not be empty</p>
+                            <p ng-show="editForm.descriptionXs.$error.minlength && !editForm.descriptionXs.$pristine"
+                               class="help-block">
+                                Description should have at least 5 characters</p>
+                            <p ng-show="editForm.descriptionXs.$error.maxlength && !editForm.descriptionXs.$pristine"
+                               class="help-block">
+                                Description should have not more than 2000 characters</p>
+                        </div>
                     </div>
 
                 </article>
             </div>
         </div>
     </form>
-
-
-    </br>Rating: {{movie.rating}}
-    <button ng-click="updateRating(movie.id)">Rating</button>
-
 
     <div class="container-fluid">
         <section class="row">
@@ -47,7 +112,9 @@
                 <div class="title_wrapper">
                     <div>
                         <span class="r_title">{{review.title}}</span>
-                        <span class="r_auth">by <i>{{review.userName}}</i></span>
+                        <span class="r_auth">
+                            by <i ng-class="review.banned ? 'u_banned' : ''">{{review.userName}}</i>
+                        </span>
                     </div>
                     <div class="r_rating_wrap">
                         <span class="r_rating">{{review.rating}}</span>
@@ -56,7 +123,7 @@
                 <div class="r_desc"><p>{{review.reviewText}}</p></div>
                 <div class="r_date">
                     <button ng-click="ban(review.userId)" class="btn btn-danger">Ban</button>
-                    <button ng-click="delReview(review.id)" class="btn btn-warning">Delete review</button>
+                    <button ng-click="delReview(review.id)" class="btn btn-warning" title="Delete review">Delete review</button>
                     <span>{{review.postDate}}</span>
                 </div>
             </div>

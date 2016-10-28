@@ -33,7 +33,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-offset-1 col-lg-10 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-sx-12">
-
                 <table class="table table-bordered users_table">
                     <thead>
                     <tr>
@@ -65,19 +64,21 @@
                         <td>{{user.login}}</td>
                         <td>{{user.name}}</td>
                         <td class="butt_td">
-                            <button class="btn btn-default" ng-click="admin(user.id)">{{user.admin}}</button>
+                            <button ng-class="user.admin ? 'btn btn-default u_butt_admin' : 'btn btn-default'"
+                                    ng-click="admin(user.id)">{{user.admin}}
+                            </button>
                         </td>
                         <td class="butt_td">
-                            <button class="btn btn-default" ng-click="ban(user.id)">{{user.banned}}</button>
+                            <button ng-class="user.banned ? 'btn btn-default u_butt_banned' : 'btn btn-default'"
+                                    ng-click="ban(user.id)">{{user.banned}}
+                            </button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
-
 
     <div class="container-fluid">
         <div class="row">
@@ -88,5 +89,4 @@
             </section>
         </div>
     </div>
-
 </div>

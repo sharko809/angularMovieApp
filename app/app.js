@@ -19,7 +19,7 @@ angular.module('myApp', [
     'registration',
     'cookieService',
     'myApp.version'
-]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
     $locationProvider.hashPrefix('!');
 
     $routeProvider.otherwise({redirectTo: '/login'});

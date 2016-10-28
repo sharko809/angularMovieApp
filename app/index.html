@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
     <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -44,14 +44,26 @@
             <a class="navbar-brand" href="#">Don't forget</a>
         </div>
 
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#!/login">Login</a></li>
-                <li><a href="#!/movies">Movies</a></li>
-                <li><a href="#!/top">Top rated</a></li>
-                <li><a href="#!/admin">Admin panel</a></li>
-                <li><a href="#!/account">Account</a></li>
+                <li ng-if="true"><a href="#!/login">Login</a></li>
+                <li><a href="#!/movies" title="Movies list">Movies</a></li>
+                <li><a href="#!/top" title="Top 10 movies with highest rating">Top rated</a></li>
+                <li ng-if="true" class="dropdown">
+                    <a class="dropdown-toggle" id="dropdownMenu"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Admin panel
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <li><a href="#!/admin/movies" title="Allows editing movies">Manage movies</a></li>
+                        <li><a href="#!/admin/users" title="Manage users: ban or make admins">Users</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#!/admin/addmovie" title="Add new movie">Add movie</a></li>
+                        <li><a href="#!/admin/newuser" title="Create new user">Create user</a></li>
+                    </ul>
+                </li>
+                <li ng-if="true"><a href="#!/account" title="Your account info">Account</a></li>
             </ul>
             <form class="navbar-form navbar-left" ng-submit="search()">
                 <div class="form-group nav_search">
@@ -61,13 +73,13 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#!/registration">Registration</a></li>
-                <li><a style="width: 100%; font-weight: 600" href="#" ng-click="performLogout()">Logout</a></li>
+                <li><a href="#!/registration" title="Registration page">Registration</a></li>
+                <li><a style="width: 100%; font-weight: 600" href="#" ng-click="performLogout()"
+                       title="Logout from site">Logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
-
 
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade

@@ -22,7 +22,8 @@ angular.module('myApp.adminMovies', [
 
         sc.updateRating = function (movieId) {
             moviesService.updateMovieRating(movieId).then(function success(response) {
-                alert("OK");
+                alert("OK");// TODO inform in some other way
+                sc.movies = redrawRating(sc.movies, movieId, response.data);
             }, function error(response) {
                 console.log(response.data);
                 alert(response.data.userMessage);
@@ -61,3 +62,23 @@ angular.module('myApp.adminMovies', [
         }
 
     }]);
+
+/**
+ * Updates displayed rating of the movie specified by id
+ * @param movies movies list
+ * @param movieId movie id to update rating
+ * @param newRating new movie rating
+ * @returns {*} list of updated movies
+ */
+var redrawRating = function (movies, movieId, newRating) {
+    if (movies == null || movieId == null || newRating == null) {
+        return null;
+    }
+    movies.forEach(m => {
+        if (m.id == movieId) {
+            m.rating = newRating;
+        }
+    });
+
+    return movies;
+};

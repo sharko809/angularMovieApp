@@ -1,14 +1,42 @@
-<div ng-controller="newuserCtrl">
-    <form ng-submit="createUser()">
-        <label for="name">Enter nickname:</label>
-        <input id="name" type="text" placeholder="Your nickname" ng-model="user.name">
-        <label for="email">Enter e-mail:</label>
-        <input id="email" type="email" placeholder="Your e-mail" ng-model="user.login">
-        <label for="password">Enter password:</label>
-        <input id="password" type="password" placeholder="Your password" ng-model="user.password">
-        <label for="isAdmin">
-            <input id="isAdmin" type="checkbox" ng-model="user.admin">Is admin
-        </label>
-        <button type="submit">Create user</button>
-    </form>
+<div ng-controller="newuserCtrl" class="container-fluid">
+    <div class="row">
+        <div class="center-block col-lg-3 col-md-5 col-sm-7 col-xs-10" style="float: none">
+            <form ng-submit="createUser()" name="adregForm" class="login_form">
+                <div class="form-group"
+                     ng-class="{ 'has-error' : adregForm.name.$invalid && !adregForm.name.$pristine}">
+                    <label>Enter nickname:
+                        <input class="form-control" type="text" ng-minlength="3" ng-maxlength="20" name="name"
+                               placeholder="User nickname" ng-model="user.name" required>
+                    </label>
+                    <p ng-show="adregForm.name.$invalid && !adregForm.name.$pristine" class="help-block">
+                        Enter name between 3 and 20 characters</p>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error' : adregForm.login.$invalid && !adregForm.login.$pristine}">
+                    <label>Enter e-mail:
+                        <input class="form-control" type="email" ng-minlength="3" ng-maxlength="60" name="login"
+                               placeholder="Your e-mail" ng-model="user.login" required>
+                    </label>
+                    <p ng-show="adregForm.login.$invalid && !adregForm.login.$pristine" class="help-block">
+                        Valid e-mail is required for login</p>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error' : adregForm.password.$invalid && !adregForm.password.$pristine}">
+                    <label>Enter password:
+                        <input class="form-control" type="password" placeholder="Your password" name="password"
+                               ng-minlength="3" ng-maxlength="15" ng-model="user.password" required>
+                    </label>
+                    <p ng-show="adregForm.password.$invalid && !adregForm.password.$pristine" class="help-block">
+                        Password should be between 3 and 15 characters long</p>
+                </div>
+                <div class="form-group">
+                    <label for="isAdmin">Is admin
+                        <input id="isAdmin" type="checkbox" ng-model="user.admin">
+                    </label>
+                </div>
+                <button ng-disabled="adregForm.$invalid" type="submit" class="btn btn-info">Create user</button>
+            </form>
+            <div id="adreg_result"></div>
+        </div>
+    </div>
 </div>

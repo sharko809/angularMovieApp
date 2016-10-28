@@ -115,13 +115,14 @@
 
 .movie_wrapper .m_rating {
     margin-bottom: 7px;
+    margin-top: 7px;
 }
 
 .movie_wrapper .m_rating:after {
     content: "/10";
 }
 
-.movie_wrapper .m_desc{
+.movie_wrapper .m_desc {
     text-indent: 3em;
     margin-top: 10px;
     font-size: 13px;
@@ -152,27 +153,27 @@
 }
 
 /*------------------------------------------Movie view*/
-.movie_view .poster_img{
+.movie_view .poster_img {
     max-width: 350px;
 }
 
-.movie_view .m_title{
+.movie_view .m_title {
     font-size: 28px;
 }
 
-.movie_view .m_date{
+.movie_view .m_date {
     font-size: 18px;
 }
 
-.movie_view .m_director{
+.movie_view .m_director {
     font-size: 18px;
 }
 
-.movie_view .m_rating{
+.movie_view .m_rating {
     font-size: 18px;
 }
 
-.movie_view .m_desc{
+.movie_view .m_desc {
     font-size: 16px;
     margin-top: 15px;
     padding: 20px 20px;
@@ -181,13 +182,13 @@
     width: 100%;
 }
 
-.movie_view input{
+.movie_view input {
     outline: none;
     border: none;
     cursor: pointer;
 }
 
-.movie_view input:focus{
+.movie_view input:focus {
     background-color: #ecf0f1;
     border-radius: 3px;
     padding: 5px;
@@ -195,7 +196,7 @@
     color: black;
 }
 
-.movie_view textarea{
+.movie_view textarea {
     outline: none;
     border: none;
     background: transparent;
@@ -207,17 +208,17 @@
     min-height: 150px;
 }
 
-.movie_view textarea:focus{
+.movie_view textarea:focus {
     cursor: text;
 }
 
-.movie_view .m_p_url input{
+.movie_view .m_p_url input {
     margin-left: 10px;
     width: 80%;
     min-width: 250px;
 }
 
-.movie_view .save_changes{
+.movie_view .save_changes {
     display: block;
     min-width: 150px;
     max-width: 450px;
@@ -226,34 +227,34 @@
     font-size: 16px;
 }
 
-section.edit_mov{
+section.edit_mov {
     width: 100% !important;
 }
 
-@media (max-width: 768px){
-    .movie_view section{
+@media (max-width: 768px) {
+    .movie_view section {
         margin-top: 35px;
     }
 
-    .movie_view .img_wrapper{
+    .movie_view .img_wrapper {
         display: flex;
         justify-content: center;
     }
 
-    .movie_view .poster_img{
+    .movie_view .poster_img {
         max-width: 230px;
     }
 
-    .movie_view .xs-m_desc{
+    .movie_view .xs-m_desc {
 
     }
 }
 
-.review textarea{
+.review textarea {
     max-width: 100%;
 }
 
-.review{
+.review {
     background-color: #ecf0f1;
     padding: 15px;
     border-radius: 4px;
@@ -261,7 +262,7 @@ section.edit_mov{
     margin-top: 20px;
 }
 
-.review_item{
+.review_item {
     background-color: #ecf0f1;
     padding: 15px;
     border-radius: 4px;
@@ -270,33 +271,34 @@ section.edit_mov{
     overflow: hidden;
 }
 
-.review_item .title_wrapper{
+.review_item .title_wrapper {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.review_item .title_wrapper .r_rating:before{
+.review_item .title_wrapper .r_rating:before {
     content: "Rating: ";
 }
-.review_item .title_wrapper .r_rating:after{
+
+.review_item .title_wrapper .r_rating:after {
     content: "/10";
 }
 
-.review_item .title_wrapper .r_title{
+.review_item .title_wrapper .r_title {
     font-size: 18px;
     font-weight: 600;
 }
 
-.review_item:last-child{
+.review_item:last-child {
     margin-bottom: 50px;
 }
 
-.review_item .title_wrapper .r_auth{
+.review_item .title_wrapper .r_auth {
     color: #7f8c8d;
 }
 
-.review_item .r_date{
+.review_item .r_date {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -306,22 +308,22 @@ section.edit_mov{
 
 }
 
-.review_item .r_date button{
+.review_item .r_date button {
     margin: 0 7px;
     padding: 3px 8px !important;
     opacity: 0.7;
 }
 
-.review_item .r_date button:hover{
+.review_item .r_date button:hover {
     opacity: 1;
 }
 
-.review_item .r_date span:before{
+.review_item .r_date span:before {
     content: "Posted: ";
     font-style: italic;
 }
 
-.review button{
+.review button {
     font-size: 15px;
     width: 50%;
     max-width: 150px;
@@ -330,32 +332,32 @@ section.edit_mov{
     margin-top: 20px;
 }
 
-.review_wrapper{
+.review_wrapper {
     padding: 0 15px;
 }
 
-body{
+body {
     font-family: "Open Sans" !important;
 }
 
-.tira_wrapper{
+.tira_wrapper {
     display: flex;
     justify-content: space-between;
 }
 
-.users_table td{
+.users_table td {
     vertical-align: middle !important;
 }
 
-.users_table .butt_td{
+.users_table .butt_td {
     text-align: center;
 }
 
-.users_table .butt_td button{
+.users_table .butt_td button {
     width: 100%;
 }
 
-.manage_movie img{
+.manage_movie img {
     max-width: 170px !important;
     width: 170px !important;
     height: 250px !important;
@@ -363,19 +365,44 @@ body{
     opacity: 0.8;
 }
 
-.manage_movie{
+.manage_movie {
     max-width: 300px;
 }
 
-.manage_movie_wrap{
+.manage_movie_wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.manage_movie .manage_t{
+.manage_movie .manage_t {
     font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.r_holder {
+    display: flex;
+    margin-bottom: 7px;
+}
+
+.result_block {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.u_banned {
+    color: #e74c3c !important;
+    text-decoration: line-through;
+}
+
+.u_butt_admin {
+    color: white !important;
+    background: #2ecc71 none !important;
+}
+
+.u_butt_banned {
+    color: white !important;
+    background: #d35400 none !important;
 }

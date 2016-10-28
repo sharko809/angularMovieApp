@@ -18,10 +18,19 @@ angular.module('myApp.newuser', [
 
         sc.createUser = function () {
             userService.addUser(sc.user).then(function success(response) {
-                alert(response.data);
+                var elem = angular.element(document.querySelector('#adreg_result'))
+                    .removeClass()
+                    .empty()
+                    .addClass('alert alert-success result_block')
+                    .html(response.data);
             }, function error(response) {
-                console.log(response.data);
-                alert(response.data.userMessage);
+                var elem = angular.element(document.querySelector('#adreg_result'))
+                    .removeClass()
+                    .empty()
+                    .addClass('alert alert-danger result_block');
+                response.data.userMessage.forEach(m => {
+                    elem.append(m + '</br>');
+                });
             });
         };
 

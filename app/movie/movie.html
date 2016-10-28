@@ -67,7 +67,8 @@
                 <div class="title_wrapper">
                     <div>
                         <span class="r_title">{{review.title}}</span>
-                        <span class="r_auth">by <i>{{review.userName}}</i></span>
+                        <span class="r_auth">
+                            by <i ng-class="review.banned ? 'u_banned' : ''">{{review.userName}}</i></span>
                     </div>
                     <div class="r_rating_wrap">
                         <span class="r_rating">{{review.rating}}</span>

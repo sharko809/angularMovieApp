@@ -69,7 +69,10 @@ var makeReviews = function (data) {
 
     reviews.forEach(r => {
         users.forEach(u => {
-            if (u.id == r.userId) r.userName = u.name;
+            if (u.id == r.userId) {
+                r.userName = u.name;
+                r.banned = u.banned == true;
+            }
         });
     });
 
