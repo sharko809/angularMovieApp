@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div ng-if="is_user_logged_in" class="container-fluid">
         <div class="row review_wrapper">
             <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12 review">
                 <form ng-submit="postReview()" name="reviewForm">
@@ -60,6 +60,7 @@
             </div>
         </div>
     </div>
+    <p ng-if="!is_user_logged_in">You need to log in to write reviews</p>
 
     <div class="container-fluid">
         <section class="row">

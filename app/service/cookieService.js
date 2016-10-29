@@ -18,12 +18,6 @@ angular.module('cookieService', ['ngCookies'])
             storage.remove(cookieName);
         };
 
-        factory.authExists = function () {
-            var cookie = storage.get('user_auth_cookie');
-            return !!cookie;
-        }
-        ;
-
         return factory;
 
     }]);

@@ -22,8 +22,83 @@ angular.module('myApp', [
 ]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
     $locationProvider.hashPrefix('!');
 
-    for (var path in window.routes) {
-        $routeProvider.when(path, window.routes[path]);
+    angular.module('myApp').my_routes = {
+        "/top": {
+            templateUrl: 'toprated/toprated.html',
+            controller: 'topCtrl',
+            requireLogin: false,
+            requireAdmin: false
+        },
+        "/account": {
+            templateUrl: 'account/account.html',
+            controller: 'accountCtrl',
+            requireLogin: true,
+            requireAdmin: false
+        },
+        "/login": {
+            templateUrl: 'login/login.html',
+            controller: 'loginCtrl',
+            requireLogin: false,
+            requireAdmin: false
+        },
+        "/search": {
+            templateUrl: 'search/search.html',
+            controller: 'searchCtrl',
+            requireLogin: false,
+            requireAdmin: false
+        },
+        "/registration": {
+            templateUrl: 'registration/registration.html',
+            controller: 'regCtrl',
+            requireLogin: false,
+            requireAdmin: false
+        },
+        "/movies": {
+            templateUrl: 'movies/movies.html',
+            controller: 'moviesCtrl',
+            requireLogin: false,
+            requireAdmin: false
+        },
+        "/movies/:param": {
+            templateUrl: 'movie/movie.html',
+            controller: 'movieCtrl',
+            requireLogin: false,
+            requireAdmin: false
+        },
+        "/admin/users": {
+            templateUrl: 'admin/users/users.html',
+            controller: 'usersCtrl',
+            requireLogin: true,
+            requireAdmin: true
+        },
+        "/admin/newuser": {
+            templateUrl: 'admin/newUser/newUser.html',
+            controller: 'newuserCtrl',
+            requireLogin: true,
+            requireAdmin: true
+        },
+        "/admin/addmovie": {
+            templateUrl: 'admin/newMovie/newMovie.html',
+            controller: 'newmovieCtrl',
+            requireLogin: true,
+            requireAdmin: true
+        },
+        "/admin/movies": {
+            templateUrl: 'admin/movies/manageMovies.html',
+            controller: 'manageCtrl',
+            requireLogin: true,
+            requireAdmin: true
+        },
+        "/admin/movies/:param": {
+            templateUrl: 'admin/movies/editMovie/editMovie.html',
+            controller: 'editCtrl',
+            requireLogin: true,
+            requireAdmin: true
+        }
+    };
+
+    for (var path in angular.module('myApp').my_routes) {
+        $routeProvider.when(path, angular.module('myApp').my_routes[path]);
     }
 
     $routeProvider.otherwise({redirectTo: '/movies'});
@@ -65,104 +140,81 @@ angular.module('myApp', [
             return input;
         };
     })
-    .run(['cookieService', 'loginService', '$rootScope', function (cookieService, loginService, $rootScope) {
+    .run(['cookieService', 'loginService', '$rootScope', '$location', function (cookieService, loginService, $rootScope, $location) {
 
         var authCookie = cookieService.getCookie('user_auth_cookie');
         if (authCookie != null || authCookie != undefined) {
             loginService.setAuthHeader(authCookie);
         }
 
+        $rootScope.is_user_logged_in = false;
+        $rootScope.is_user_admin = false;
+
+        loginService.isAuthenticated().then(function success() {
+            $rootScope.is_user_logged_in = true;
+        }, function error() {
+            $rootScope.is_user_logged_in = false;
+        });
+        loginService.isAdmin().then(function success() {
+            $rootScope.is_user_admin = true;
+        }, function error() {
+            $rootScope.is_user_admin = false;
+        });
+
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            for (var path in window.routes) {
+
+            var reqLogin;
+            var reqAdmin;
+            var thisPath;
+
+            for (var path in angular.module('myApp').my_routes) {
                 if (next.indexOf(path) != -1) {
-                    if (window.routes[path].requireLogin && !cookieService.authExists()) {
-                        alert('Authentication required to access this page');
-                        event.preventDefault();
-                        // TODO redirect
-                    } else {
-                        if (window.routes[path].requireLogin && window.routes[path].requireAdmin &&
-                            (!cookieService.authExists() || !loginService.isAdmin()) ) {
-                            alert('You do not have access to this page');
-                            event.preventDefault();
+                    reqLogin = angular.module('myApp').my_routes[path].requireLogin;
+                    reqAdmin = angular.module('myApp').my_routes[path].requireAdmin;
+                    thisPath = path;
+                }
+            }
+
+            if (reqLogin) {
+                if (!$rootScope.is_user_logged_in) {
+                    event.preventDefault();
+                    loginService.isAuthenticated().then(function success() {
+                        $rootScope.is_user_logged_in = true;
+                        if (reqAdmin) {
+                            loginService.isAdmin().then(function success() {
+                                $rootScope.is_user_admin = true;
+                                $location.path(thisPath);
+                            }, function error() {
+                                $rootScope.is_user_admin = false;
+                                alert('You do not have access to this page');
+                            })
+                        } else {
+                            $location.path(thisPath);
                         }
+                    }, function error() {
+                        $rootScope.is_user_logged_in = false;
+                        alert('Authorization required to access this page');
+                    });
+                } else {
+                    if (reqAdmin) {
+                        if (!$rootScope.is_user_admin) {
+                            event.preventDefault();
+                            loginService.isAdmin().then(function success() {
+                                $rootScope.is_user_admin = true;
+                                $location.path(thisPath);
+                            }, function error() {
+                                $rootScope.is_user_admin = false;
+                                alert('You do not have access to this page');
+                            });
+                        } else {
+                            $location.path(thisPath);
+                        }
+                    } else {
+                        $location.path(thisPath);
                     }
                 }
             }
+
         });
 
     }]);
-
-window.routes = {
-    "/top": {
-        templateUrl: 'toprated/toprated.html',
-        controller: 'topCtrl',
-        requireLogin: false,
-        requireAdmin: false
-    },
-    "/account": {
-        templateUrl: 'account/account.html',
-        controller: 'accountCtrl',
-        requireLogin: true,
-        requireAdmin: false
-    },
-    "/login": {
-        templateUrl: 'login/login.html',
-        controller: 'loginCtrl',
-        requireLogin: false,
-        requireAdmin: true
-    },
-    "/search": {
-        templateUrl: 'search/search.html',
-        controller: 'searchCtrl',
-        requireLogin: false,
-        requireAdmin: false
-    },
-    "/registration": {
-        templateUrl: 'registration/registration.html',
-        controller: 'regCtrl',
-        requireLogin: false,
-        requireAdmin: false
-    },
-    "/movies": {
-        templateUrl: 'movies/movies.html',
-        controller: 'moviesCtrl',
-        requireLogin: false,
-        requireAdmin: false
-    },
-    "/movies/:param": {
-        templateUrl: 'movie/movie.html',
-        controller: 'movieCtrl',
-        requireLogin: false,
-        requireAdmin: false
-    },
-    "/admin/users": {
-        templateUrl: 'admin/users/users.html',
-        controller: 'usersCtrl',
-        requireLogin: true,
-        requireAdmin: true
-    },
-    "/admin/newuser": {
-        templateUrl: 'admin/newUser/newUser.html',
-        controller: 'newuserCtrl',
-        requireLogin: true,
-        requireAdmin: true
-    },
-    "/admin/addmovie": {
-        templateUrl: 'admin/newMovie/newMovie.html',
-        controller: 'newmovieCtrl',
-        requireLogin: true,
-        requireAdmin: true
-    },
-    "/admin/movies": {
-        templateUrl: 'admin/movies/manageMovies.html',
-        controller: 'manageCtrl',
-        requireLogin: true,
-        requireAdmin: true
-    },
-    "/admin/movies/:param": {
-        templateUrl: 'admin/movies/editMovie/editMovie.html',
-        controller: 'editCtrl',
-        requireLogin: true,
-        requireAdmin: true
-    }
-};

@@ -6,7 +6,7 @@ angular.module('myApp.login', [
     'cookieService'
 ])
 
-    .controller('loginCtrl', ['$scope', 'loginService', 'cookieService', function (sc, service, cookieService) {
+    .controller('loginCtrl', ['$scope', 'loginService', 'cookieService', '$location', '$rootScope', function (sc, service, cookieService, $location, $rootScope) {
 
         sc.performLogin = function () {
             service.login(sc.user).then(function successCallback(response) {
@@ -20,6 +20,13 @@ angular.module('myApp.login', [
                     .empty()
                     .addClass('alert alert-success')
                     .html('Login successful');
+                $rootScope.is_user_logged_in = true;
+                service.isAdmin().then(function success() {
+                    $rootScope.is_user_admin = true;
+                }, function error() {
+                    $rootScope.is_user_admin = false;
+                });
+                $location.path("/movies");
                 console.log(response); // TODO remove
             }, function errorCallback(response) {
                 console.log(response);// TODO remove

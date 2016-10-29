@@ -26,15 +26,18 @@ angular.module('myApp.loginService', [])
 
         factory.isAdmin = function () {
 
-            $http({
+            return $http({
                 method: 'GET',
-                url: 'https://localhost:8443/admin'
-            }).then(function success(response) {
-                return true;
-            }, function error(response) {
-                return false;
-            })
+                url: 'https://localhost:8443/admin/check'
+            });
 
+        };
+
+        factory.isAuthenticated = function () {
+            return $http({
+                method: 'GET',
+                url: 'https://localhost:8443/account/check'
+            });
         };
 
         return factory;

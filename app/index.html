@@ -46,10 +46,10 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-if="true"><a href="#!/login">Login</a></li>
+                <li ng-if="!is_user_logged_in"><a href="#!/login">Login</a></li>
                 <li><a href="#!/movies" title="Movies list">Movies</a></li>
                 <li><a href="#!/top" title="Top 10 movies with highest rating">Top rated</a></li>
-                <li ng-if="true" class="dropdown">
+                <li ng-if="is_user_admin" class="dropdown">
                     <a class="dropdown-toggle admin_cursor" id="dropdownMenu"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Admin panel
@@ -63,7 +63,7 @@
                         <li><a href="#!/admin/newuser" title="Create new user">Create user</a></li>
                     </ul>
                 </li>
-                <li ng-if="true"><a href="#!/account" title="Your account info">Account</a></li>
+                <li ng-if="is_user_logged_in"><a href="#!/account" title="Your account info">Account</a></li>
             </ul>
             <form class="navbar-form navbar-left" ng-submit="search()">
                 <div class="form-group nav_search">
