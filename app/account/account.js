@@ -5,13 +5,6 @@ angular.module('myApp.account', [
     'myApp.accountService'
 ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/account', {
-            templateUrl: 'account/account.html',
-            controller: 'accountCtrl'
-        });
-    }])
-
     .controller('accountCtrl', ['$scope', 'accountService', function (sc, service) {
 
         sc.user = {};

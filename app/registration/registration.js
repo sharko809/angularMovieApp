@@ -4,12 +4,6 @@ angular.module('registration', [
     'ngRoute',
     'myApp.userService'
 ])
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/registration', {
-            templateUrl: 'registration/registration.html',
-            controller: 'regCtrl'
-        })
-    }])
 
     .controller('regCtrl', ['$scope', 'userService', function (sc, userService) {
 

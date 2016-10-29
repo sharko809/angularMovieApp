@@ -5,13 +5,6 @@ angular.module('myApp.newuser', [
     'myApp.userService'
 ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/admin/newuser', {
-            templateUrl: 'admin/newUser/newUser.html',
-            controller: 'newuserCtrl'
-        });
-    }])
-
     .controller('newuserCtrl', ['$scope', 'userService', function (sc, userService) {
 
         sc.user = {};

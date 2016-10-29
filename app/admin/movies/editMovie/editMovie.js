@@ -6,13 +6,6 @@ angular.module('myApp.editmovie', [
     'myApp.userService'
 ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/admin/movies/:param', {
-            templateUrl: 'admin/movies/editMovie/editMovie.html',
-            controller: 'editCtrl'
-        });
-    }])
-
     .controller('editCtrl', ['$scope', 'moviesService', 'userService', '$routeParams', '$location',
         function (sc, moviesService, userService, route, loc) {
 

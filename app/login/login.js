@@ -6,13 +6,6 @@ angular.module('myApp.login', [
     'cookieService'
 ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/login', {
-            templateUrl: 'login/login.html',
-            controller: 'loginCtrl'
-        });
-    }])
-
     .controller('loginCtrl', ['$scope', 'loginService', 'cookieService', function (sc, service, cookieService) {
 
         sc.performLogin = function () {

@@ -5,13 +5,6 @@ angular.module('myApp.adminMovies', [
     'myApp.moviesService'
 ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/admin/movies', {
-            templateUrl: 'admin/movies/manageMovies.html',
-            controller: 'manageCtrl'
-        });
-    }])
-
     .controller('manageCtrl', ['$scope', 'moviesService', '$location', function (sc, moviesService, loc) {
 
         sc.movies = {};

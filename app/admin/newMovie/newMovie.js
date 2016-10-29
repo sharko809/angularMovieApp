@@ -5,13 +5,6 @@ angular.module('myApp.newmovie', [
     'myApp.moviesService',
 ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/admin/addmovie', {
-            templateUrl: 'admin/newMovie/newMovie.html',
-            controller: 'newmovieCtrl'
-        });
-    }])
-
     .controller('newmovieCtrl', ['$scope', 'moviesService', function (sc, moviesService) {
 
         sc.movie = {};

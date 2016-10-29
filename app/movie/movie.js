@@ -5,13 +5,6 @@ angular.module('myApp.movie', [
     'myApp.moviesService'
 ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/movies/:param', {
-            templateUrl: 'movie/movie.html',
-            controller: 'movieCtrl'
-        });
-    }])
-
     .controller('movieCtrl', ['$scope', '$routeParams', 'moviesService', function (sc, route, service) {
 
         sc.movieId = route.param;

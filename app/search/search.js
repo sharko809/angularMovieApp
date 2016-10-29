@@ -5,13 +5,6 @@ angular.module('myApp.search', [
     'myApp.moviesService'
 ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/search', {
-            templateUrl: 'search/search.html',
-            controller: 'searchCtrl'
-        });
-    }])
-
     .controller('searchCtrl', ['$scope', '$location', 'moviesService', function (sc, loc, service) {
 
         sc.movies = {};

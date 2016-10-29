@@ -22,7 +22,11 @@ angular.module('myApp', [
 ]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
     $locationProvider.hashPrefix('!');
 
-    $routeProvider.otherwise({redirectTo: '/login'});
+    for (var path in window.routes) {
+        $routeProvider.when(path, window.routes[path]);
+    }
+
+    $routeProvider.otherwise({redirectTo: '/movies'});
 }])
 
     .controller('mainCtrl', ['$scope', '$location', 'logoutService', function (sc, loc, logoutService) {
@@ -34,7 +38,7 @@ angular.module('myApp', [
             sc.searchInput.query = '';
         };
 
-        sc.performLogout = function() {
+        sc.performLogout = function () {
             logoutService.logout();
         }
 
@@ -61,9 +65,104 @@ angular.module('myApp', [
             return input;
         };
     })
-    .run(['cookieService', 'loginService', function (cookieService, loginService) {
+    .run(['cookieService', 'loginService', '$rootScope', function (cookieService, loginService, $rootScope) {
+
         var authCookie = cookieService.getCookie('user_auth_cookie');
         if (authCookie != null || authCookie != undefined) {
             loginService.setAuthHeader(authCookie);
         }
+
+        $rootScope.$on("$locationChangeStart", function (event, next, current) {
+            for (var path in window.routes) {
+                if (next.indexOf(path) != -1) {
+                    if (window.routes[path].requireLogin && !cookieService.authExists()) {
+                        alert('Authentication required to access this page');
+                        event.preventDefault();
+                        // TODO redirect
+                    } else {
+                        if (window.routes[path].requireLogin && window.routes[path].requireAdmin &&
+                            (!cookieService.authExists() || !loginService.isAdmin()) ) {
+                            alert('You do not have access to this page');
+                            event.preventDefault();
+                        }
+                    }
+                }
+            }
+        });
+
     }]);
+
+window.routes = {
+    "/top": {
+        templateUrl: 'toprated/toprated.html',
+        controller: 'topCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/account": {
+        templateUrl: 'account/account.html',
+        controller: 'accountCtrl',
+        requireLogin: true,
+        requireAdmin: false
+    },
+    "/login": {
+        templateUrl: 'login/login.html',
+        controller: 'loginCtrl',
+        requireLogin: false,
+        requireAdmin: true
+    },
+    "/search": {
+        templateUrl: 'search/search.html',
+        controller: 'searchCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/registration": {
+        templateUrl: 'registration/registration.html',
+        controller: 'regCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/movies": {
+        templateUrl: 'movies/movies.html',
+        controller: 'moviesCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/movies/:param": {
+        templateUrl: 'movie/movie.html',
+        controller: 'movieCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/admin/users": {
+        templateUrl: 'admin/users/users.html',
+        controller: 'usersCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    },
+    "/admin/newuser": {
+        templateUrl: 'admin/newUser/newUser.html',
+        controller: 'newuserCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    },
+    "/admin/addmovie": {
+        templateUrl: 'admin/newMovie/newMovie.html',
+        controller: 'newmovieCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    },
+    "/admin/movies": {
+        templateUrl: 'admin/movies/manageMovies.html',
+        controller: 'manageCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    },
+    "/admin/movies/:param": {
+        templateUrl: 'admin/movies/editMovie/editMovie.html',
+        controller: 'editCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    }
+};
