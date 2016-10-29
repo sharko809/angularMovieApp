@@ -64,12 +64,12 @@
                         <td>{{user.login}}</td>
                         <td>{{user.name}}</td>
                         <td class="butt_td">
-                            <button ng-class="user.admin ? 'btn btn-default u_butt_admin' : 'btn btn-default'"
+                            <button ng-class="user.admin ? 'btn btn-default u_butt_admin' : 'btn btn-default flat_back'"
                                     ng-click="admin(user.id)">{{user.admin}}
                             </button>
                         </td>
                         <td class="butt_td">
-                            <button ng-class="user.banned ? 'btn btn-default u_butt_banned' : 'btn btn-default'"
+                            <button ng-class="user.banned ? 'btn btn-default u_butt_banned' : 'btn btn-default flat_back'"
                                     ng-click="ban(user.id)">{{user.banned}}
                             </button>
                         </td>
