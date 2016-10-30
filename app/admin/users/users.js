@@ -24,8 +24,7 @@ angular.module('myApp.users', [
                 sc.notLast = !response.data.last;
             }
         }, function error(response) {
-            console.log(response.data);
-            alert(response.data.userMessage);
+            alertify.alert(response.data.userMessage);
             loc.path('/admin/users').search('page', 0).search('sort', sc.sort);
         });
 
@@ -41,29 +40,34 @@ angular.module('myApp.users', [
                     sc.sort = sort + (isDesc ? ',desc' : '');
                 }
             }, function error(response) {
-                console.log(response.data);
-                alert(response.data.userMessage);
+                alertify.alert(response.data.userMessage);
                 loc.path('/admin/users').search('page', 0).search('sort', sc.sort);
             })
         };
 
         sc.ban = function (userId) {
             userService.banUser(userId).then(function success(response) {
-                alert(response.data);// TODO inform in other way
+                var successMessage = bannedMessage(sc.users, userId);
+                alertify.reset()
+                    .maxLogItems(5)
+                    .delay(2000)
+                    .success(successMessage);
                 sc.users = toggleBan(sc.users, userId);
             }, function error(response) {
-                console.log(response.data);
-                alert(response.data.userMessage);
+                alertify.error(response.data.userMessage);
             });
         };
 
         sc.admin = function (userId) {
             userService.makeAdmin(userId).then(function success(response) {
-                alert(response.data);// TODO inform in other way
+                var successMessage = adminMessage(sc.users, userId);
+                alertify.reset()
+                    .maxLogItems(5)
+                    .delay(2000)
+                    .success(successMessage);
                 sc.users = toggleAdmin(sc.users, userId);
             }, function error(response) {
-                console.log(response.data);
-                alert(response.data.userMessage);
+                alertify.error(response.data.userMessage);
             });
         };
 
@@ -109,4 +113,32 @@ var toggleAdmin = function (users, userId) {
     });
 
     return users;
+};
+
+var bannedMessage = function (users, userId) {
+    var message;
+    users.forEach(u => {
+        if (u.id == userId) {
+            if (u.banned == true) {
+                message =  "User is not banned anymore";
+            } else {
+                message = "User banned";
+            }
+        }
+    });
+    return message;
+};
+
+var adminMessage = function (users, userId) {
+    var message;
+    users.forEach(u => {
+        if (u.id == userId) {
+            if (u.admin == true) {
+                message = "User is not admin anymore";
+            } else {
+                message = "User is admin now";
+            }
+        }
+    });
+    return message;
 };

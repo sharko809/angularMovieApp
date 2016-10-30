@@ -7,44 +7,53 @@ angular.module('myApp.movie', [
 
     .controller('movieCtrl', ['$scope', '$routeParams', 'moviesService', function (sc, route, service) {
 
-        sc.movieId = route.param;
-        sc.movie = {};
-        sc.reviews = {};
-        sc.generateRating = ratingArray();
-        sc.submitted = false;
+        var vm = this;
+        vm.movieId = route.param;
+        vm.movie = {};
+        vm.reviews = {};
+        vm.generateRating = ratingArray();
+        vm.submitted = false;
 
-        service.getMovieData(sc.movieId).then(function success(response) {
-            // TODO no movies logic
-            sc.movie = response.data.movieTransferObject;
-            sc.reviews = makeReviews(response.data);
+        service.getMovieData(vm.movieId).then(function success(response) {
+            vm.movie = response.data.movieTransferObject;
+            vm.reviews = makeReviews(response.data);
             if (!response.data.reviews[0]) {
-                sc.noReviews = true;
+                vm.noReviews = true;
             }
         }, function error(response) {
-            console.log(response);
-            alert(response.data.userMessage);
+            alertify.alert(response.data.userMessage);
         });
 
-        sc.review = {};
+        vm.review = {};
 
-        sc.postReview = function () {
-            // if (sc.reviewForm.$invalid) {
-            //     sc.submitted = true;
-            //     return;
-            // }
-            // TODO keep in mind - this is authorized users feature
-            service.postReview(sc.movieId, sc.review).then(function success(response) {
-                sc.movie = response.data.movieTransferObject;
-                sc.reviews = makeReviews(response.data);
+        vm.postReview = function () {
+            service.postReview(vm.movieId, vm.review).then(function success(response) {
+                vm.movie = response.data.movieTransferObject;
+                vm.reviews = makeReviews(response.data);
                 if (!response.data.reviews[0]) {
-                    sc.noReviews = true;
+                    vm.noReviews = true;
                 }
-                console.log("response: " + response);
-                alert("Review submitted");
+                alertify.reset()
+                    .maxLogItems(3)
+                    .delay(3000)
+                    .success('Review submitted');
+                var elem = angular.element(document.querySelector('#post_result'))
+                    .removeClass()
+                    .empty();
+                angular.element(document.querySelector('#rTitle')).val('');
+                angular.element(document.querySelector('#rText')).val('');
+                angular.element(document.querySelector('#rRating')).val('');
+                document.getElementById('post_butt').disabled = true
             }, function error(response) {
-                console.log(response.data);
-                alert(response.data.userMessage);
+                var elem = angular.element(document.querySelector('#post_result'))
+                    .removeClass()
+                    .empty()
+                    .addClass('alert alert-danger result_block');
+                response.data.userMessage.forEach(m => {
+                    elem.append(m + '</br>');
+                });
             });
+
         }
 
     }]);

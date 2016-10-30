@@ -31,7 +31,7 @@ angular.module('myApp.search', [
                     sc.totalElements = response.data.totalElements;
                 }
             }, function errorCallback(response) {
-                alert(response.data.userMessage);
+                alertify.alert(response.data.userMessage);
                 loc.path('/search').search('t', sc.movieName).search('page', 0);
             });
         }

@@ -11,14 +11,12 @@ angular.module('registration', [
 
         sc.performRegistration = function () {
             userService.registerUser(sc.user).then(function success(response) {
-                console.log(response);// TODO remove
                 var elem = angular.element(document.querySelector('#reg_result'));
                 elem.removeClass()
                     .empty()
                     .addClass('alert alert-success')
                     .html(response.data);
             }, function error(response) {
-                console.log(response);// TODO remove
                 var elem = angular.element(document.querySelector('#reg_result'));
                 elem.removeClass()
                     .empty()

@@ -23,7 +23,7 @@ angular.module('myApp.movies', [
                 sc.notLast = !response.data.last;
             }
         }, function errorCallback(response) {
-            alert(response.data.userMessage);
+            alertify.alert(response.data.userMessage);
             loc.path('/movies').search('page', 0);
         });
 

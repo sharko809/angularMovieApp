@@ -8,7 +8,6 @@ angular.module('myApp', [
     'myApp.movie',
     'myApp.toprated',
     'myApp.search',
-    'myApp.admin',
     'myApp.newmovie',
     'myApp.newuser',
     'myApp.adminMovies',
@@ -83,15 +82,15 @@ angular.module('myApp', [
             requireLogin: true,
             requireAdmin: true
         },
-        "/admin/movies": {
-            templateUrl: 'admin/movies/manageMovies.html',
-            controller: 'manageCtrl',
+        "/admin/emovies/:param": {
+            templateUrl: 'admin/movies/editMovie/editMovie.html',
+            controller: 'editCtrl',
             requireLogin: true,
             requireAdmin: true
         },
-        "/admin/movies/:param": {
-            templateUrl: 'admin/movies/editMovie/editMovie.html',
-            controller: 'editCtrl',
+        "/admin/movies": {
+            templateUrl: 'admin/movies/manageMovies.html',
+            controller: 'manageCtrl',
             requireLogin: true,
             requireAdmin: true
         }
@@ -147,74 +146,75 @@ angular.module('myApp', [
             loginService.setAuthHeader(authCookie);
         }
 
-        $rootScope.is_user_logged_in = false;
-        $rootScope.is_user_admin = false;
-
         loginService.isAuthenticated().then(function success() {
             $rootScope.is_user_logged_in = true;
+            makeDecision();
         }, function error() {
             $rootScope.is_user_logged_in = false;
+            makeDecision();
         });
         loginService.isAdmin().then(function success() {
             $rootScope.is_user_admin = true;
+            makeDecision();
         }, function error() {
             $rootScope.is_user_admin = false;
+            makeDecision();
         });
 
-        $rootScope.$on("$locationChangeStart", function (event, next, current) {
-
-            var reqLogin;
-            var reqAdmin;
-            var thisPath;
-
-            for (var path in angular.module('myApp').my_routes) {
-                if (next.indexOf(path) != -1) {
-                    reqLogin = angular.module('myApp').my_routes[path].requireLogin;
-                    reqAdmin = angular.module('myApp').my_routes[path].requireAdmin;
-                    thisPath = path;
-                }
-            }
-
-            if (reqLogin) {
-                if (!$rootScope.is_user_logged_in) {
-                    event.preventDefault();
-                    loginService.isAuthenticated().then(function success() {
-                        $rootScope.is_user_logged_in = true;
-                        if (reqAdmin) {
-                            loginService.isAdmin().then(function success() {
-                                $rootScope.is_user_admin = true;
-                                $location.path(thisPath);
-                            }, function error() {
-                                $rootScope.is_user_admin = false;
-                                alert('You do not have access to this page');
-                            })
-                        } else {
-                            $location.path(thisPath);
-                        }
-                    }, function error() {
-                        $rootScope.is_user_logged_in = false;
-                        alert('Authorization required to access this page');
-                    });
-                } else {
-                    if (reqAdmin) {
-                        if (!$rootScope.is_user_admin) {
-                            event.preventDefault();
-                            loginService.isAdmin().then(function success() {
-                                $rootScope.is_user_admin = true;
-                                $location.path(thisPath);
-                            }, function error() {
-                                $rootScope.is_user_admin = false;
-                                alert('You do not have access to this page');
-                            });
-                        } else {
-                            $location.path(thisPath);
-                        }
-                    } else {
-                        $location.path(thisPath);
+        var makeDecision = function () {
+            $rootScope.$on("$locationChangeStart", function (event, next, current) {
+                var reqLogin;
+                var reqAdmin;
+                var thisPath;
+                for (var path in angular.module('myApp').my_routes) {
+                    if (next.indexOf(path) != -1) {
+                        reqLogin = angular.module('myApp').my_routes[path].requireLogin;
+                        reqAdmin = angular.module('myApp').my_routes[path].requireAdmin;
+                        thisPath = path;
                     }
                 }
-            }
 
-        });
+                if (reqLogin) {
+                    if (!$rootScope.is_user_logged_in) {
+                        event.preventDefault();
+                        loginService.isAuthenticated().then(function success() {
+                            $rootScope.is_user_logged_in = true;
+                            if (reqAdmin) {
+                                loginService.isAdmin().then(function success() {
+                                    $rootScope.is_user_admin = true;
+                                    $location.path(thisPath);
+                                }, function error() {
+                                    $rootScope.is_user_admin = false;
+                                    alertify.alert('You do not have access to this page');
+                                })
+                            } else {
+                                $location.path(thisPath);
+                            }
+                        }, function error() {
+                            $rootScope.is_user_logged_in = false;
+                            alertify.alert('Authorization required to access this page');
+                        });
+                    } else {
+                        if (reqAdmin) {
+                            if (!$rootScope.is_user_admin) {
+                                event.preventDefault();
+                                loginService.isAdmin().then(function success() {
+                                    $rootScope.is_user_admin = true;
+                                    $location.path(thisPath);
+                                }, function error() {
+                                    $rootScope.is_user_admin = false;
+                                    alertify.alert('You do not have access to this page');
+                                });
+                            } else {
+                                $location.path(thisPath);
+                            }
+                        } else {
+                            $location.path(thisPath);
+                        }
+                    }
+                }
+
+            });
+        }
 
     }]);

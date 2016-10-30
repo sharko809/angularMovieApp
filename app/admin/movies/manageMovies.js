@@ -15,11 +15,13 @@ angular.module('myApp.adminMovies', [
 
         sc.updateRating = function (movieId) {
             moviesService.updateMovieRating(movieId).then(function success(response) {
-                alert("OK");// TODO inform in some other way
+                alertify.reset()
+                    .maxLogItems(5)
+                    .delay(2000)
+                    .success('Rating updated');
                 sc.movies = redrawRating(sc.movies, movieId, response.data);
             }, function error(response) {
-                console.log(response.data);
-                alert(response.data.userMessage);
+                alertify.alert(response.data.userMessage);
             });
         };
 
@@ -33,7 +35,7 @@ angular.module('myApp.adminMovies', [
                 sc.notLast = !response.data.last;
             }
         }, function error(response) {
-            alert(response.data.userMessage);
+            alertify.alert(response.data.userMessage);
             loc.path('/admin/movies').search('page', 0);
         });
 

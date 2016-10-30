@@ -14,7 +14,7 @@ angular.module('myApp.editmovie', [
 
             moviesService.adminGetMovie(sc.movieId).then(function success(response) {
                 if (!response.data.movieTransferObject) {
-                    alert('No movie data');
+                    alertify.alert('No movie data');
                     loc.path('/admin/movies').search('page', 0);
                 } else {
                     sc.movie = response.data.movieTransferObject;
@@ -26,19 +26,18 @@ angular.module('myApp.editmovie', [
                     }
                 }
             }, function error(response) {
-                console.log(response.data);
-                alert(response.data.userMessage);
+                alertify.alert(response.data.userMessage);
+                loc.path('/movies');
             });
 
             sc.updMovie = function () {
                 moviesService.updateMovie(sc.movieId, sc.movie).then(function success(response) {
-                    var elem = angular.element(document.querySelector('#edit_result'))// TODO displayed only once
+                    var elem = angular.element(document.querySelector('#edit_result'))
                         .removeClass()
                         .empty()
                         .addClass('alert alert-success result_block')
                         .html('Movie updated');
                 }, function error(response) {
-                    console.log(response.data);
                     var elem = angular.element(document.querySelector('#edit_result'))
                         .removeClass()
                         .empty()
@@ -52,32 +51,40 @@ angular.module('myApp.editmovie', [
             sc.updateRating = function (movieId) {
                 moviesService.updateMovieRating(movieId).then(function success(response) {
                     sc.movie.rating = response.data;
-                    alert("OK");// TODO inform some other way
+                    alertify.reset()
+                        .maxLogItems(5)
+                        .delay(2000)
+                        .success('Rating updated');
                 }, function error(response) {
-                    console.log(response.data);
-                    alert(response.data.userMessage);
+                    alertify.alert(response.data.userMessage);
                 });
             };
 
             sc.delReview = function (reviewId) {
                 moviesService.deleteReview(reviewId).then(function success(response) {
-                    alert(response.data);// TODO inform in some other way
+                    alertify.reset()
+                        .maxLogItems(5)
+                        .delay(2000)
+                        .success('Review deleted');
                     moviesService.getReviewsByMovie(sc.movieId).then(function success(response) {
                         sc.reviews = composeReviews(response.data, sc.users);
                     });
                 }, function error(response) {
-                    console.log(response.data);
-                    alert(response.data.userMessage);
+                    alertify.alert(response.data.userMessage);
                 });
             };
 
             sc.ban = function (userId) {
                 userService.banUser(userId).then(function success(response) {
-                    sc.users = toggleBanned(sc.users, userId);// TODO inform somehow
+                    var successMessage = bannedMessage(sc.users, userId);
+                    alertify.reset()
+                        .maxLogItems(5)
+                        .delay(2000)
+                        .success(successMessage);
+                    sc.users = toggleBanned(sc.users, userId);
                     sc.reviews = composeReviews(sc.reviews, sc.users);
                 }, function error(response) {
-                    console.log(response.data);
-                    alert(response.data.userMessage);
+                    alertify.alert(response.data.userMessage);
                 });
             };
 

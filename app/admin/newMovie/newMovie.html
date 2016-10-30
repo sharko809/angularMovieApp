@@ -9,46 +9,95 @@
                     </div>
                     <div class="col-lg-8 col-md-7 col-sm-8 col-xs-6">
                         <div class="edit_mov">
-                            <div class="form-group">
+                            <div class="form-group"
+                                 ng-class="{'has-error' : mForm.title.$invalid && !mForm.title.$pristine}">
                                 <label>Title
-                                    <input class="form-control" type="text" ng-model="movie.movieName"
-                                           placeholder="Movie title" style="border: 1px outset;"/>
+                                    <input class="form-control" name="title" type="text" ng-model="movie.movieName"
+                                           placeholder="Movie title" style="border: 1px outset;" ng-minlength="1"
+                                           ng-maxlength="100" required/>
                                 </label>
+                                <p ng-show="mForm.title.$error.required && !mForm.title.$pristine"
+                                   class="help-block">
+                                    Title should have at least 1 character</p>
+                                <p ng-show="mForm.title.$error.maxlength && !mForm.title.$pristine"
+                                   class="help-block">
+                                    Title should have not more than 100 characters</p>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group"
+                                 ng-class="{'has-error' : mForm.director.$invalid && !mForm.director.$pristine}">
                                 <label>Director
-                                    <input class="form-control" type="text" ng-model="movie.director"
-                                           placeholder="Director" style="border: 1px outset;"/>
+                                    <input class="form-control" name="director" type="text" ng-model="movie.director"
+                                           ng-minlength="1"
+                                           ng-maxlength="40"
+                                           placeholder="Director" style="border: 1px outset;" required/>
                                 </label>
+                                <p ng-show="mForm.director.$error.required && !mForm.director.$pristine"
+                                   class="help-block">
+                                    Director name should have at least 1 character</p>
+                                <p ng-show="mForm.director.$error.maxlength && !mForm.director.$pristine"
+                                   class="help-block">
+                                    Director name should have not more than 40 characters</p>
                             </div>
                             <div class="form-group">
                                 <label>Release date <input class="form-control" type="date"
                                                            ng-model="movie.releaseDate" style="border: 1px outset;"/>
                                 </label>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group"
+                                 ng-class="{'has-error' : mForm.poster.$invalid && !mForm.poster.$pristine}">
                                 <label>Poster url
-                                    <input class="form-control" type="url" ng-model="movie.posterURL"
-                                           placeholder="Poster URL" style="border: 1px outset;"/>
+                                    <input class="form-control" type="url" ng-model="movie.posterURL" name="poster"
+                                           ng-maxlength="255" placeholder="Poster URL" style="border: 1px outset;"/>
                                 </label>
+                                <p ng-show="mForm.poster.$error.maxlength && !mForm.poster.$pristine"
+                                   class="help-block">
+                                    Poster url should have not more than 255 characters</p>
+                                <p ng-show="mForm.poster.$error.url && !mForm.poster.$pristine"
+                                   class="help-block">
+                                    Poster url should be a valid url address</p>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group"
+                                 ng-class="{'has-error' : mForm.trailer.$invalid && !mForm.trailer.$pristine}">
                                 <label>Trailer url
-                                    <input type="url" class="form-control" ng-model="movie.trailerURL"
+                                    <input type="url" ng-maxlength="255" class="form-control"
+                                           ng-model="movie.trailerURL" name="trailer"
                                            placeholder="Trailer URL" style="border: 1px outset;"/>
                                 </label>
+                                <p ng-show="mForm.trailer.$error.maxlength && !mForm.trailer.$pristine"
+                                   class="help-block">
+                                    Trailer url should have not more than 255 characters</p>
+                                <p ng-show="mForm.trailer.$error.url && !mForm.trailer.$pristine"
+                                   class="help-block">
+                                    Trailer url should be a valid url address</p>
                             </div>
                         </div>
                     </div>
-                    <textarea id="description" class="form-control" placeholder="Movie description"
-                              ng-model="movie.description" style="margin-left: 30px; margin-right: 30px; border: 1px outset; width: 97%; min-width: inherit; max-width: none;"></textarea>
+                    <div ng-class="{'has-error' : mForm.descriptionLg.$invalid && !mForm.descriptionLg.$pristine}">
+                    <textarea id="description" class="form-control" placeholder="Movie description" minlength="5"
+                              ng-maxlength="2000" name="descriptionLg"
+                              ng-model="movie.description"
+                              style="margin-left: 30px; margin-right: 30px; border: 1px outset; width: 97%; min-width: inherit; max-width: none;"
+                              required></textarea>
+                        <p style="margin-left: 30px;" ng-show="mForm.descriptionLg.$error.required && !mForm.descriptionLg.$pristine"
+                           class="help-block">
+                            Description should not be empty</p>
+                        <p style="margin-left: 30px;" ng-show="mForm.descriptionLg.$error.minlength && !mForm.descriptionLg.$pristine"
+                           class="help-block">
+                            Description should have at least 5 characters</p>
+                        <p style="margin-left: 30px;" ng-show="mForm.descriptionLg.$error.maxlength && !mForm.descriptionLg.$pristine"
+                           class="help-block">
+                            Description should have not more than 2000 characters</p>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="center-block col-lg-2 col-md-2 col-sm-2 col-sx-2" style="float: none;">
-                        <button type="submit" class="btn btn-info create_movie">Create movie</button>
+                        <button ng-disabled="mForm.$invalid" type="submit" class="btn btn-info create_movie">Create
+                            movie
+                        </button>
                     </div>
                 </div>
             </form>
+            <div style="margin: 0px 30px;" id="add_result"></div>
         </div>
     </div>
 </div>

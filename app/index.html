@@ -41,7 +41,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Don't forget</a>
+            <a class="navbar-brand" href="#">DSProject</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -74,7 +74,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!/registration" title="Registration page">Registration</a></li>
-                <li><a style="width: 100%; font-weight: 600" href="#" ng-click="performLogout()"
+                <li ng-if="is_user_logged_in"><a style="width: 100%; font-weight: 600" href="#" ng-click="performLogout()"
                        title="Logout from site">Logout</a></li>
             </ul>
         </div>
@@ -91,6 +91,7 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="../node_modules/angular-cookies/angular-cookies.js"></script>
+<script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
 <script src="app.js"></script>
 <script src="service/logoutService.js"></script>
 <script src="service/cookieService.js"></script>
@@ -102,7 +103,6 @@
 <script src="movie/movie.js"></script>
 <script src="toprated/toprated.js"></script>
 <script src="search/search.js"></script>
-<script src="admin/admin.js"></script>
 <script src="account/account.js"></script>
 <script src="service/accountService.js"></script>
 <script src="service/userService.js"></script>

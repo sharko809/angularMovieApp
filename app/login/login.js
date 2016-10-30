@@ -27,9 +27,7 @@ angular.module('myApp.login', [
                     $rootScope.is_user_admin = false;
                 });
                 $location.path("/movies");
-                console.log(response); // TODO remove
             }, function errorCallback(response) {
-                console.log(response);// TODO remove
                 var elem = angular.element(document.querySelector('#log_result'))
                     .removeClass()
                     .empty()
