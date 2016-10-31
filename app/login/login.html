@@ -20,7 +20,7 @@
                     <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">
                         Password should be between 3 and 15 characters long</p>
                 </div>
-                <button ng-disabled="loginForm.$invalid" type="submit" class="btn btn-info">Login</button>
+                <button ng-disabled="loginForm.$invalid || is_user_logged_in" type="submit" class="btn btn-info">Login</button>
             </form>
             <div id="log_result"></div>
         </div>
