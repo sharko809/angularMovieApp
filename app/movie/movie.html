@@ -8,6 +8,7 @@
                          ng-src="{{ctrl.movie.posterURL || 'resources/no-poster-available.png'}}"/>
                 </div>
                 <div class="col-lg-8 col-md-7 col-sm-8 col-xs-6">
+                    <a ng-if="is_user_admin" ng-href="#!/admin/emovies/{{ctrl.movie.id}}" class="btn btn-info" role="button">Edit movie</a>
                     <section>
                         <div class="m_title">{{ctrl.movie.movieName}}</div>
                         <div class="m_date">Release date: {{ctrl.movie.releaseDate}}</div>
@@ -46,7 +47,7 @@
                             </p>
                         </div>
                         <div class="form-group"
-                             ng-class="{ 'has-error' : reviewForm.reviewRating.$invalid}">
+                             ng-class="{ 'has-error' : reviewForm.reviewRating.$invalid && !reviewForm.reviewRating.$pristine}">
                             <label>Rating
                                 <select id="rRating" class="form-control" name="reviewRating"
                                         ng-model="ctrl.review.rating" required>
