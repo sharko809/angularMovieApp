@@ -1,6 +1,5 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
 angular.module('myApp', [
     'ngRoute',
     'myApp.login',
@@ -16,85 +15,9 @@ angular.module('myApp', [
     'myApp.account',
     'myApp.logoutService',
     'registration',
-    'cookieService',
-    'myApp.version'
-]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+    'cookieService'
+]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
-
-    angular.module('myApp').my_routes = {
-        "/top": {
-            templateUrl: 'toprated/toprated.html',
-            controller: 'topCtrl',
-            requireLogin: false,
-            requireAdmin: false
-        },
-        "/account": {
-            templateUrl: 'account/account.html',
-            controller: 'accountCtrl',
-            requireLogin: true,
-            requireAdmin: false
-        },
-        "/login": {
-            templateUrl: 'login/login.html',
-            controller: 'loginCtrl',
-            requireLogin: false,
-            requireAdmin: false
-        },
-        "/search": {
-            templateUrl: 'search/search.html',
-            controller: 'searchCtrl',
-            requireLogin: false,
-            requireAdmin: false
-        },
-        "/registration": {
-            templateUrl: 'registration/registration.html',
-            controller: 'regCtrl',
-            requireLogin: false,
-            requireAdmin: false
-        },
-        "/movies": {
-            templateUrl: 'movies/movies.html',
-            controller: 'moviesCtrl',
-            requireLogin: false,
-            requireAdmin: false
-        },
-        "/movies/:param": {
-            templateUrl: 'movie/movie.html',
-            controller: 'movieCtrl',
-            requireLogin: false,
-            requireAdmin: false
-        },
-        "/admin/users": {
-            templateUrl: 'admin/users/users.html',
-            controller: 'usersCtrl',
-            requireLogin: true,
-            requireAdmin: true
-        },
-        "/admin/newuser": {
-            templateUrl: 'admin/newUser/newUser.html',
-            controller: 'newuserCtrl',
-            requireLogin: true,
-            requireAdmin: true
-        },
-        "/admin/addmovie": {
-            templateUrl: 'admin/newMovie/newMovie.html',
-            controller: 'newmovieCtrl',
-            requireLogin: true,
-            requireAdmin: true
-        },
-        "/admin/emovies/:param": {
-            templateUrl: 'admin/movies/editMovie/editMovie.html',
-            controller: 'editCtrl',
-            requireLogin: true,
-            requireAdmin: true
-        },
-        "/admin/movies": {
-            templateUrl: 'admin/movies/manageMovies.html',
-            controller: 'manageCtrl',
-            requireLogin: true,
-            requireAdmin: true
-        }
-    };
 
     for (var path in angular.module('myApp').my_routes) {
         $routeProvider.when(path, angular.module('myApp').my_routes[path]);
@@ -218,3 +141,78 @@ angular.module('myApp', [
         }
 
     }]);
+
+angular.module('myApp').my_routes = {
+    "/top": {
+        templateUrl: 'toprated/toprated.html',
+        controller: 'topCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/account": {
+        templateUrl: 'account/account.html',
+        controller: 'accountCtrl',
+        requireLogin: true,
+        requireAdmin: false
+    },
+    "/login": {
+        templateUrl: 'login/login.html',
+        controller: 'loginCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/search": {
+        templateUrl: 'search/search.html',
+        controller: 'searchCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/registration": {
+        templateUrl: 'registration/registration.html',
+        controller: 'regCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/movies": {
+        templateUrl: 'movies/movies.html',
+        controller: 'moviesCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/movies/:param": {
+        templateUrl: 'movie/movie.html',
+        controller: 'movieCtrl',
+        requireLogin: false,
+        requireAdmin: false
+    },
+    "/admin/users": {
+        templateUrl: 'admin/users/users.html',
+        controller: 'usersCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    },
+    "/admin/newuser": {
+        templateUrl: 'admin/newUser/newUser.html',
+        controller: 'newuserCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    },
+    "/admin/addmovie": {
+        templateUrl: 'admin/newMovie/newMovie.html',
+        controller: 'newmovieCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    },
+    "/admin/emovies/:param": {
+        templateUrl: 'admin/movies/editMovie/editMovie.html',
+        controller: 'editCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    },
+    "/admin/movies": {
+        templateUrl: 'admin/movies/manageMovies.html',
+        controller: 'manageCtrl',
+        requireLogin: true,
+        requireAdmin: true
+    }
+};
