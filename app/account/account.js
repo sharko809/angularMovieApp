@@ -1,9 +1,6 @@
 'use strict';
 
-angular.module('myApp.account', [
-    'ngRoute',
-    'myApp.accountService'
-])
+angular.module('myApp.account', ['myApp.accountService'])
 
     .controller('accountCtrl', ['$scope', 'accountService', function (sc, service) {
 

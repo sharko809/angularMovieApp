@@ -1,9 +1,6 @@
 'use strict';
 
-angular.module('registration', [
-    'ngRoute',
-    'myApp.userService'
-])
+angular.module('registration', ['myApp.userService'])
 
     .controller('regCtrl', ['$scope', 'userService', function (sc, userService) {
 

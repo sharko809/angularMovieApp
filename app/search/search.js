@@ -1,9 +1,6 @@
 'use strict';
 
-angular.module('myApp.search', [
-    'ngRoute',
-    'myApp.moviesService'
-])
+angular.module('myApp.search', ['myApp.moviesService'])
 
     .controller('searchCtrl', ['$scope', '$location', 'moviesService', function (sc, loc, service) {
 

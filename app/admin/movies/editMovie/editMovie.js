@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('myApp.editmovie', [
-    'ngRoute',
     'myApp.moviesService',
     'myApp.userService'
 ])

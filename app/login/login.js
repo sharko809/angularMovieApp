@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('myApp.login', [
-    'ngRoute',
     'myApp.loginService',
     'cookieService'
 ])
 
-    .controller('loginCtrl', ['$scope', 'loginService', 'cookieService', '$location', '$rootScope', function (sc, service, cookieService, $location, $rootScope) {
+    .controller('loginCtrl', ['$scope', 'loginService', 'cookieService', '$location', '$rootScope',
+        function (sc, service, cookieService, $location, $rootScope) {
 
         sc.performLogin = function () {
             service.login(sc.user).then(function successCallback(response) {

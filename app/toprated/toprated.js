@@ -1,9 +1,7 @@
 'use strict';
 
-angular.module('myApp.toprated', [
-    'ngRoute',
-    'myApp.moviesService'
-])
+angular.module('myApp.toprated', ['myApp.moviesService'])
+
     .controller('topCtrl', ['$scope', 'moviesService', function (sc, service) {
 
         sc.movies = {};

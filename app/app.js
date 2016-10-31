@@ -62,7 +62,8 @@ angular.module('myApp', [
             return input;
         };
     })
-    .run(['cookieService', 'loginService', '$rootScope', '$location', function (cookieService, loginService, $rootScope, $location) {
+    .run(['cookieService', 'loginService', '$rootScope', '$location',
+        function (cookieService, loginService, $rootScope, $location) {
 
         var authCookie = cookieService.getCookie('user_auth_cookie');
         if (authCookie != null || authCookie != undefined) {

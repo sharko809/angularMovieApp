@@ -1,9 +1,6 @@
 'use strict';
 
-angular.module('myApp.newuser', [
-    'ngRoute',
-    'myApp.userService'
-])
+angular.module('myApp.newuser', ['myApp.userService'])
 
     .controller('newuserCtrl', ['$scope', 'userService', function (sc, userService) {
 

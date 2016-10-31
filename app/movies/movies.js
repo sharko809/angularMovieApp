@@ -1,9 +1,6 @@
 'use strict';
 
-angular.module('myApp.movies', [
-    'ngRoute',
-    'myApp.moviesService'
-])
+angular.module('myApp.movies', ['myApp.moviesService'])
 
     .controller('moviesCtrl', ['$scope', 'moviesService', '$location', function (sc, service, loc) {
 
